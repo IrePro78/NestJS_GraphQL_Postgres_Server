@@ -42,6 +42,18 @@ services:
     networks:
       - Next_masters_network
 
+#  apollo_graphql_server:
+#    container_name: apollo-graphql-server
+#    build: .
+#    env_file:
+#      - .env
+#    depends_on:
+#      - db
+#    ports:
+#      - '3100:3100'
+#    networks:
+#      - Next_masters_network
+
 networks:
   Next_masters_network:
     driver: bridge
