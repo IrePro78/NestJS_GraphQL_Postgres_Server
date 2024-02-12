@@ -1,0 +1,28 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Product {
+  """Unique identifier of the product"""
+  id: ID!
+
+  """Name of the product"""
+  name: String!
+
+  """Description of the product"""
+  description: String
+
+  """Price of the product"""
+  price: Int!
+
+  """Image of the product"""
+  product_image: String!
+}
+
+type Query {
+  """Get All Products"""
+  getProducts: [Product!]
+
+  """Get Product By ID"""
+  getProduct(id: ID!): Product
+}

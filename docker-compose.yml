@@ -1,0 +1,22 @@
+version: '3.9'
+
+services:
+
+  db:
+    image: postgres:latest
+    container_name: postgres-database-masters
+    restart: always
+    ports:
+      - '5430:5432'
+    volumes:
+      - .pgdata:/var/lib/postgresql/data
+
+    env_file:
+      - .env
+
+    networks:
+      - Next_masters_network
+
+networks:
+  Next_masters_network:
+    driver: bridge

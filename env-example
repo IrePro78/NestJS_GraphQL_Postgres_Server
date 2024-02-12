@@ -1,0 +1,26 @@
+# Server run
+PORT=4000
+
+# Connection database
+DB_TYPE=postgres
+DB_HOST=localhost
+DB_PORT=5430
+DB_USERNAME=root
+DB_PASSWORD=%next_14$
+DB_NAME=NextMasters
+
+# Create database
+POSTGRES_USER=root
+POSTGRES_PASSWORD=%next_14$
+POSTGRES_DB=NextMasters
+
+# Migrations
+TYPEORM_ENTITIES=dist/**/*.entity.js
+
+# Cors
+CORS_CLIENTS_URL='http://localhost:5173'
+
+#App URL
+API_URL=http://localhost:3000/api
+WEB_URL=http://localhost:5173
+
