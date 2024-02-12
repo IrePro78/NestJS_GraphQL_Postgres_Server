@@ -3,16 +3,20 @@ PORT=4000
 
 # Connection database
 DB_TYPE=postgres
-DB_HOST=localhost
-DB_PORT=5430
-DB_USERNAME=root
+#DB_HOST=localhost
+DB_HOST=postgres-database-masters
+DB_PORT=5432
+DB_USERNAME=next
 DB_PASSWORD=%next_14$
 DB_NAME=NextMasters
 
 # Create database
-POSTGRES_USER=root
+POSTGRES_USER=next
 POSTGRES_PASSWORD=%next_14$
 POSTGRES_DB=NextMasters
+
+#Database vectors
+QDRANT_URL=http://localhost:6333
 
 # Migrations
 TYPEORM_ENTITIES=dist/**/*.entity.js
@@ -21,6 +25,8 @@ TYPEORM_ENTITIES=dist/**/*.entity.js
 CORS_CLIENTS_URL='http://localhost:5173'
 
 #App URL
-API_URL=http://localhost:3000/api
+API_URL=http://localhost:4000/api
 WEB_URL=http://localhost:5173
+
+
 

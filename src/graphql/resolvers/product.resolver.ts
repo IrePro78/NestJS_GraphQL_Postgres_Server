@@ -8,7 +8,7 @@ import { mockProduct } from '../../_mocks_/products.mocks';
 export class ProductResolver {
   constructor(
     private readonly productService: ProductsService,
-    // private readonly collectionsService: CollectionsService,
+    private readonly collectionsService: CollectionsService,
   ) {}
 
   @Query(() => [Product], {
@@ -21,6 +21,7 @@ export class ProductResolver {
     return mockProduct;
     // return this.productService.findAll();
   }
+
   @Query(() => Product, {
     name: 'getProduct',
     description: 'Get Product By ID',

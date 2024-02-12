@@ -2,18 +2,43 @@ version: '3.9'
 
 services:
 
+  api:
+    container_name: api-masters-backend
+    build: .
+    image: api
+    restart: unless-stopped
+    ports:
+      - '4000:4000'
+    env_file:
+      - .env
+    networks:
+      - Next_masters_network
+
   db:
     image: postgres:latest
     container_name: postgres-database-masters
     restart: always
     ports:
-      - '5430:5432'
-    volumes:
-      - .pgdata:/var/lib/postgresql/data
+      - '5432:5432'
+    #    volumes:
+    #      - ./pg_data:/var/lib/postgresql/data
 
     env_file:
       - .env
 
+    networks:
+      - Next_masters_network
+
+  qdrant_db:
+    container_name: api-masters-qdrant
+    image: qdrant/qdrant:latest
+    restart: always
+    ports:
+      - "6333:6333"
+    volumes:
+      - ./qdrant_storage:/qdrant/storage
+    env_file:
+      - .env
     networks:
       - Next_masters_network
 
