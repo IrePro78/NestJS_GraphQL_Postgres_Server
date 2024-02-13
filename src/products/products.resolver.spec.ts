@@ -3,7 +3,6 @@ import { ProductResolver } from '../graphql/resolvers/product.resolver';
 
 describe('ProductsResolver', () => {
   let resolver: ProductResolver;
-
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       providers: [ProductResolver],
