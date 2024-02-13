@@ -1,11 +1,17 @@
 import { Field, ID, ObjectType } from '@nestjs/graphql';
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  BaseEntity,
+  Column,
+  Entity,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 import { Product } from './product.model';
 import { Order } from './orders.model';
 
 @Entity('order_items')
 @ObjectType()
-export class OrderItems {
+export class OrderItems extends BaseEntity {
   @PrimaryGeneratedColumn('uuid')
   @Field(() => ID, { description: 'Unique identifier of the order item' })
   id: string;

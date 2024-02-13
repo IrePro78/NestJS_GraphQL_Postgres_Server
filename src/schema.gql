@@ -26,3 +26,8 @@ type Query {
   """Get Product By ID"""
   getProduct(id: ID!): Product
 }
+
+type Mutation {
+  """Create Product"""
+  createProduct(name: String!, description: String!, price: Float!, product_image: String!): Product
+}

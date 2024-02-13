@@ -1,12 +1,13 @@
-import { Resolver, Query, Args, ID } from '@nestjs/graphql';
+import { Args, ID, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { Product } from '../models/product.model';
 import { ProductsService } from '../../products/products.service';
-import { CollectionsService } from '../../collections/collections.service';
-import { mockProduct } from '../../_mocks_/products.mocks';
 
 @Resolver('Product')
 export class ProductResolver {
-  constructor() {} // private readonly collectionsService: CollectionsService, // private readonly productService: ProductsService,
+  constructor(
+    private readonly productService: ProductsService,
+    // private readonly collectionsService: CollectionsService,
+  ) {} // private readonly collectionsService: CollectionsService, // private readonly
 
   @Query(() => [Product], {
     name: 'getProducts',
@@ -14,9 +15,7 @@ export class ProductResolver {
     nullable: true,
   })
   async getProducts(): Promise<Product[]> {
-    console.log(mockProduct);
-    return mockProduct;
-    // return this.productService.findAll();
+    return this.productService.findAll();
   }
 
   @Query(() => Product, {
@@ -27,9 +26,28 @@ export class ProductResolver {
   async getProduct(
     @Args('id', { type: () => ID }) id: string,
   ): Promise<Product> {
-    console.log(mockProduct.find((product) => product.id === id));
+    // console.log(mockProduct.find((product) => product.id === id));
 
-    return mockProduct.find((product) => product.id === id);
-    // return this.productService.findOneById(id);
+    // return mockProduct.find((product) => product.id === id);
+    return this.productService.findOneById(id);
+  }
+
+  @Mutation(() => Product, {
+    name: 'createProduct',
+    description: 'Create Product',
+    nullable: true,
+  })
+  async createProduct(
+    @Args('name') name: string,
+    @Args('description') description: string,
+    @Args('price') price: number,
+    @Args('product_image') product_image: string,
+  ): Promise<void> {
+    return this.productService.create({
+      name,
+      description,
+      price,
+      product_image,
+    });
   }
 }

@@ -1,5 +1,6 @@
 import { Field, ID, Int, ObjectType } from '@nestjs/graphql';
 import {
+  BaseEntity,
   Column,
   Entity,
   ManyToMany,
@@ -12,7 +13,7 @@ import { OrderItems } from './order-items.model';
 
 @Entity('products')
 @ObjectType()
-export class Product {
+export class Product extends BaseEntity {
   @PrimaryGeneratedColumn('uuid')
   @Field(() => ID, { description: 'Unique identifier of the product' })
   id: string;
@@ -30,7 +31,7 @@ export class Product {
   product_image: string;
 
   @ManyToMany(() => Category)
-  categories?: Category[];
+  categories?: Collection[];
 
   @ManyToMany(() => Collection)
   collections?: Collection[];

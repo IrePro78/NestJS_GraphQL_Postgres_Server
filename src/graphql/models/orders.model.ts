@@ -1,5 +1,11 @@
 import { Field, ID, ObjectType } from '@nestjs/graphql';
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  BaseEntity,
+  Column,
+  Entity,
+  OneToMany,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 import { OrderItems } from './order-items.model';
 
 enum OrderStatus {
@@ -10,7 +16,7 @@ enum OrderStatus {
 
 @Entity('orders')
 @ObjectType()
-export class Order {
+export class Order extends BaseEntity {
   @PrimaryGeneratedColumn('uuid')
   @Field(() => ID, { description: 'Unique identifier of the order' })
   id: string;
@@ -26,5 +32,5 @@ export class Order {
   status: string;
 
   @OneToMany(() => OrderItems, (orderItems) => orderItems)
-  orderItems: OrderItems;
+  orderItems: OrderItems[];
 }

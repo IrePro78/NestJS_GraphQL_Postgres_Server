@@ -1,5 +1,6 @@
 import { Field, ID, ObjectType } from '@nestjs/graphql';
 import {
+  BaseEntity,
   Column,
   Entity,
   JoinTable,
@@ -10,7 +11,7 @@ import { Product } from './product.model';
 
 @Entity('categories')
 @ObjectType()
-export class Category {
+export class Category extends BaseEntity {
   @PrimaryGeneratedColumn('uuid')
   @Field(() => ID, { description: 'Unique identifier of the category' })
   id: string;
