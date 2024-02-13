@@ -2,17 +2,18 @@ version: '3.9'
 
 services:
 
-  api:
-    container_name: api-masters-backend
-    build: .
-    image: api
-    restart: unless-stopped
-    ports:
-      - '4000:4000'
-    env_file:
-      - .env
-    networks:
-      - Next_masters_network
+  #  apollo_graphql_server:
+  #    container_name: apollo-graphql-server
+  #    build: .
+  #    env_file:
+  #      - .env
+  #    depends_on:
+  #      - db
+  #    ports:
+  #      - '4000:4000'
+  #    networks:
+  #      - Next_masters_network
+
 
   db:
     image: postgres:latest
@@ -20,8 +21,8 @@ services:
     restart: always
     ports:
       - '5432:5432'
-    #    volumes:
-    #      - ./pg_data:/var/lib/postgresql/data
+    volumes:
+      - ./pg_data:/var/lib/postgresql/data
 
     env_file:
       - .env
@@ -41,18 +42,6 @@ services:
       - .env
     networks:
       - Next_masters_network
-
-#  apollo_graphql_server:
-#    container_name: apollo-graphql-server
-#    build: .
-#    env_file:
-#      - .env
-#    depends_on:
-#      - db
-#    ports:
-#      - '3100:3100'
-#    networks:
-#      - Next_masters_network
 
 networks:
   Next_masters_network:

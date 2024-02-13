@@ -8,15 +8,14 @@ import {
 } from 'typeorm';
 import { Product } from './product.model';
 
-@Entity('collections')
+@Entity('categories')
 @ObjectType()
-export class Collection {
+export class Category {
   @PrimaryGeneratedColumn('uuid')
-  @Field(() => ID, { description: 'Unique identifier of the collection' })
+  @Field(() => ID, { description: 'Unique identifier of the category' })
   id: string;
-
   @Column()
-  @Field({ description: 'Name of the collection' })
+  @Field({ description: 'Name of the category' })
   name: string;
 
   @ManyToMany(() => Product)

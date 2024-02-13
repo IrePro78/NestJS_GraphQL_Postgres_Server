@@ -6,10 +6,7 @@ import { mockProduct } from '../../_mocks_/products.mocks';
 
 @Resolver('Product')
 export class ProductResolver {
-  constructor(
-    private readonly productService: ProductsService,
-    private readonly collectionsService: CollectionsService,
-  ) {}
+  constructor() {} // private readonly collectionsService: CollectionsService, // private readonly productService: ProductsService,
 
   @Query(() => [Product], {
     name: 'getProducts',

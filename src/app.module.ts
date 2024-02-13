@@ -8,6 +8,7 @@ import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { ProductsModule } from './products/products.module';
 import { CollectionsModule } from './collections/collections.module';
 import { DatabaseConfiguration } from './config/typeorm.config';
+import { ApolloServerPluginLandingPageLocalDefault } from '@apollo/server/plugin/landingPage/default';
 
 @Module({
   imports: [
@@ -18,6 +19,8 @@ import { DatabaseConfiguration } from './config/typeorm.config';
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
       autoSchemaFile: 'src/schema.gql',
+      playground: false,
+      plugins: [ApolloServerPluginLandingPageLocalDefault()],
     }),
     ProductsModule,
     CollectionsModule,

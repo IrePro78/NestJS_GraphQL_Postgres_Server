@@ -4,5 +4,6 @@ import { ProductResolver } from '../graphql/resolvers/product.resolver';
 
 @Module({
   providers: [ProductsService, ProductResolver],
+  exports: [ProductsService],
 })
 export class ProductsModule {}
