@@ -3,7 +3,6 @@ import {
   BaseEntity,
   Column,
   Entity,
-  JoinTable,
   ManyToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
@@ -20,6 +19,5 @@ export class Category extends BaseEntity {
   name: string;
 
   @ManyToMany(() => Product)
-  @JoinTable()
   products: Product[];
 }

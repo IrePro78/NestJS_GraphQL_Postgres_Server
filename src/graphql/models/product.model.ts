@@ -3,6 +3,7 @@ import {
   BaseEntity,
   Column,
   Entity,
+  JoinTable,
   ManyToMany,
   OneToMany,
   PrimaryGeneratedColumn,
@@ -30,8 +31,13 @@ export class Product extends BaseEntity {
   @Field({ description: 'Image of the product' })
   product_image: string;
 
+  @Column()
+  @Field({ description: 'Category ID of the product' })
+  category_id: string;
+
   @ManyToMany(() => Category)
-  categories?: Collection[];
+  @JoinTable()
+  categories: Category[];
 
   @ManyToMany(() => Collection)
   collections?: Collection[];

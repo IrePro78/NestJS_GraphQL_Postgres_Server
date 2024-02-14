@@ -9,6 +9,7 @@ import { ProductsModule } from './products/products.module';
 import { CollectionsModule } from './collections/collections.module';
 import { DatabaseConfiguration } from './typeorm/typeorm.config';
 import { ApolloServerPluginLandingPageLocalDefault } from '@apollo/server/plugin/landingPage/default';
+import { CategoriesModule } from './categories/categories.module';
 
 @Module({
   imports: [
@@ -24,6 +25,7 @@ import { ApolloServerPluginLandingPageLocalDefault } from '@apollo/server/plugin
     }),
     ProductsModule,
     CollectionsModule,
+    CategoriesModule,
   ],
   controllers: [AppController],
   providers: [AppService],

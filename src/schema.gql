@@ -2,6 +2,14 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+type Category {
+  """Unique identifier of the category"""
+  id: ID!
+
+  """Name of the category"""
+  name: String!
+}
+
 type Product {
   """Unique identifier of the product"""
   id: ID!
@@ -17,6 +25,10 @@ type Product {
 
   """Image of the product"""
   product_image: String!
+
+  """Category ID of the product"""
+  category_id: String!
+  categories: [Category!]!
 }
 
 type Query {
@@ -25,9 +37,21 @@ type Query {
 
   """Get Product By ID"""
   getProduct(id: ID!): Product
+
+  """Get All Categories"""
+  getCategories: [Category!]
 }
 
 type Mutation {
   """Create Product"""
-  createProduct(name: String!, description: String!, price: Float!, product_image: String!): Product
+  createProduct(createProductData: CreateProductInput!): Product
+}
+
+"""Create product input object type."""
+input CreateProductInput {
+  name: String!
+  description: String!
+  price: Float!
+  product_image: String!
+  category_id: String!
 }

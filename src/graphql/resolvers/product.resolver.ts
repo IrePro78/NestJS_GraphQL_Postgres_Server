@@ -1,12 +1,23 @@
-import { Args, ID, Mutation, Query, Resolver } from '@nestjs/graphql';
+import {
+  Args,
+  ID,
+  Mutation,
+  Parent,
+  Query,
+  ResolveField,
+  Resolver,
+} from '@nestjs/graphql';
 import { Product } from '../models/product.model';
 import { ProductsService } from '../../products/products.service';
+import { Category } from '../models/categories.model';
+import { CategoriesService } from '../../categories/categories.service';
+import { CreateProductInput } from '../dto/create-product.input';
 
-@Resolver('Product')
+@Resolver(() => Product)
 export class ProductResolver {
   constructor(
     private readonly productService: ProductsService,
-    // private readonly collectionsService: CollectionsService,
+    private readonly categoryService: CategoriesService,
   ) {} // private readonly collectionsService: CollectionsService, // private readonly
 
   @Query(() => [Product], {
@@ -26,10 +37,12 @@ export class ProductResolver {
   async getProduct(
     @Args('id', { type: () => ID }) id: string,
   ): Promise<Product> {
-    // console.log(mockProduct.find((product) => product.id === id));
-
-    // return mockProduct.find((product) => product.id === id);
     return this.productService.findOneById(id);
+  }
+
+  @ResolveField(() => [Category])
+  categories(@Parent() product: Product) {
+    return this.categoryService.findByProductId(product.id);
   }
 
   @Mutation(() => Product, {
@@ -38,16 +51,10 @@ export class ProductResolver {
     nullable: true,
   })
   async createProduct(
-    @Args('name') name: string,
-    @Args('description') description: string,
-    @Args('price') price: number,
-    @Args('product_image') product_image: string,
+    @Args('createProductData')
+    createProductData: CreateProductInput,
+    // @Args('categoryId', { type: () => ID }) categoryId: string,
   ): Promise<void> {
-    return this.productService.create({
-      name,
-      description,
-      price,
-      product_image,
-    });
+    return this.productService.create(createProductData);
   }
 }
