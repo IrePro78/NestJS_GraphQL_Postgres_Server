@@ -11,21 +11,27 @@ export class ProductsService {
   }
 
   async findAll(): Promise<Product[]> {
-    const product = await Product.find();
-    console.log(product);
-    return product;
+    const products = await Product.find({
+      relations: {
+        categories: true,
+      },
+    });
+    console.log(products);
+
+    return { ...products };
   }
 
   async create(productData: CreateProductInput) {
-    const prod = await Product.createQueryBuilder()
+    const product = await Product.createQueryBuilder()
+      .insert()
+      .values(productData)
+      .execute();
+    await Product.createQueryBuilder()
       .relation(Product, 'categories')
-      .of(productData)
-      .add(productData.category_id)
-      .then((res) => {
-        console.log(res);
-        return res;
-      });
-    return prod;
+      .of(product.identifiers[0].id)
+      .add(productData.category_id);
+
+    return 'prod';
     // for (const prod of mockProduct) {
     //   await Product.save({ ...prod });
     // console.log(prod);

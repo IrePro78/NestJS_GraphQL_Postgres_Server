@@ -54,7 +54,7 @@ export class ProductResolver {
     @Args('createProductData')
     createProductData: CreateProductInput,
     // @Args('categoryId', { type: () => ID }) categoryId: string,
-  ): Promise<void> {
+  ): Promise<string> {
     return this.productService.create(createProductData);
   }
 }
