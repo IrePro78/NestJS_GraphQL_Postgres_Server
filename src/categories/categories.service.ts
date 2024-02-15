@@ -7,15 +7,13 @@ export class CategoriesService {
   constructor(private readonly productService: ProductsService) {}
 
   async findByProductId(id: string) {
-    const category = await Category.find({
+    return await Category.find({
       relations: { products: true },
-      where: { products: { id: '7c7bb099-0537-4850-a21e-f3cecde07a6a' } },
+      where: { products: { id } },
     });
-    console.log('sssssssssssssssss', category);
-    return category;
   }
 
-  async findBytId(id: string) {
+  async findById(id: string) {
     return Category.find({ where: { id } });
   }
 
