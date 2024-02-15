@@ -4,38 +4,42 @@ import { CreateProductInput } from '../graphql/dto/create-product.input';
 
 @Injectable()
 export class ProductsService {
-  // constructor(private readonly categoryService: CategoriesService) {}
-
   async findOneById(id: string) {
-    return Product.findOneBy({ id });
+    const product = await Product.findOne({
+      where: { id },
+      relations: ['categories'],
+    });
+    console.log(product);
+    return product;
   }
 
   async findAll(): Promise<Product[]> {
-    const products = await Product.find({
+    return await Product.find({
       relations: {
         categories: true,
       },
     });
-    console.log(products);
+  }
 
-    return { ...products };
+  async findByCategoryId(id: string) {
+    return Product.find({
+      where: { categories: { id } },
+      relations: ['categories'],
+    });
   }
 
   async create(productData: CreateProductInput) {
-    const product = await Product.createQueryBuilder()
+    const productId = await Product.createQueryBuilder()
       .insert()
+      .into(Product)
       .values(productData)
-      .execute();
+      .execute()
+      .then((res) => res.raw[0].id);
     await Product.createQueryBuilder()
       .relation(Product, 'categories')
-      .of(product.identifiers[0].id)
-      .add(productData.category_id);
-
-    return 'prod';
-    // for (const prod of mockProduct) {
-    //   await Product.save({ ...prod });
-    // console.log(prod);
-    // // return prod.save();
-    // return Product.save(prod);
+      .of(productId)
+      .add(productData.category_id)
+      .then((res) => res);
+    return this.findOneById(productId);
   }
 }

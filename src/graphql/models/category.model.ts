@@ -3,6 +3,7 @@ import {
   BaseEntity,
   Column,
   Entity,
+  JoinTable,
   ManyToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
@@ -18,6 +19,7 @@ export class Category extends BaseEntity {
   @Field({ description: 'Name of the category' })
   name: string;
 
-  @ManyToMany(() => Product)
+  @ManyToMany(() => Product, (product) => product.categories)
+  @JoinTable()
   products: Product[];
 }

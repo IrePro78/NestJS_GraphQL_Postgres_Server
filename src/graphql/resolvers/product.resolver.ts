@@ -9,7 +9,7 @@ import {
 } from '@nestjs/graphql';
 import { Product } from '../models/product.model';
 import { ProductsService } from '../../products/products.service';
-import { Category } from '../models/categories.model';
+import { Category } from '../models/category.model';
 import { CategoriesService } from '../../categories/categories.service';
 import { CreateProductInput } from '../dto/create-product.input';
 
@@ -29,6 +29,15 @@ export class ProductResolver {
     return this.productService.findAll();
   }
 
+  @ResolveField(() => [Category], {
+    name: 'categories',
+    description: 'Get Categories By Product',
+    nullable: true,
+  })
+  async categories(@Parent() product: Product) {
+    return this.categoryService.findByProductId(product.id);
+  }
+
   @Query(() => Product, {
     name: 'getProduct',
     description: 'Get Product By ID',
@@ -40,11 +49,6 @@ export class ProductResolver {
     return this.productService.findOneById(id);
   }
 
-  @ResolveField(() => [Category])
-  categories(@Parent() product: Product) {
-    return this.categoryService.findByProductId(product.id);
-  }
-
   @Mutation(() => Product, {
     name: 'createProduct',
     description: 'Create Product',
@@ -53,8 +57,7 @@ export class ProductResolver {
   async createProduct(
     @Args('createProductData')
     createProductData: CreateProductInput,
-    // @Args('categoryId', { type: () => ID }) categoryId: string,
-  ): Promise<string> {
+  ): Promise<Product> {
     return this.productService.create(createProductData);
   }
 }

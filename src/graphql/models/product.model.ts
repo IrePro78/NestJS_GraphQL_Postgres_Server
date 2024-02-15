@@ -8,7 +8,7 @@ import {
   OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
-import { Category } from './categories.model';
+import { Category } from './category.model';
 import { Collection } from './collection.model';
 import { OrderItems } from './order-items.model';
 
@@ -31,11 +31,7 @@ export class Product extends BaseEntity {
   @Field({ description: 'Image of the product' })
   product_image: string;
 
-  // @Column()
-  // @Field({ description: 'Category ID of the product' })
-  // category_id: string;
-
-  @ManyToMany(() => Category, (category) => category)
+  @ManyToMany(() => Category, (category) => category.products)
   @JoinTable()
   categories: Category[];
 

@@ -8,6 +8,9 @@ type Category {
 
   """Name of the category"""
   name: String!
+
+  """Get Products By Category"""
+  products: [Product!]
 }
 
 type Product {
@@ -25,7 +28,9 @@ type Product {
 
   """Image of the product"""
   product_image: String!
-  categories: [Category!]!
+
+  """Get Categories By Product"""
+  categories: [Category!]
 }
 
 type Query {
