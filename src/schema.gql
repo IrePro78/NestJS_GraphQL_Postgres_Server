@@ -24,7 +24,7 @@ type Product {
   description: String
 
   """Price of the product"""
-  price: Int!
+  price: Float!
 
   """Image of the product"""
   product_image: String!
@@ -35,7 +35,7 @@ type Product {
 
 type Query {
   """Get All Products"""
-  getProducts: [Product!]
+  getProducts(take: Int! = 20, skip: Int! = 0): [Product!]
 
   """Get Product By ID"""
   getProduct(id: ID!): Product

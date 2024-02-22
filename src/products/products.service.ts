@@ -9,15 +9,16 @@ export class ProductsService {
       where: { id },
       relations: ['categories'],
     });
-    console.log(product);
     return product;
   }
 
-  async findAll(): Promise<Product[]> {
+  async findAll(take: number = 20, skip: number = 0): Promise<Product[]> {
     return await Product.find({
       relations: {
         categories: true,
       },
+      take,
+      skip,
     });
   }
 

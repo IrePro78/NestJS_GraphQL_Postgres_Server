@@ -1,4 +1,4 @@
-import { Field, ID, Int, ObjectType } from '@nestjs/graphql';
+import { Field, Float, ID, Int, ObjectType } from '@nestjs/graphql';
 import {
   BaseEntity,
   Column,
@@ -25,7 +25,7 @@ export class Product extends BaseEntity {
   @Field({ nullable: true, description: 'Description of the product' })
   description: string;
   @Column()
-  @Field(() => Int, { description: 'Price of the product' })
+  @Field(() => Float, { description: 'Price of the product' })
   price: number;
   @Column()
   @Field({ description: 'Image of the product' })

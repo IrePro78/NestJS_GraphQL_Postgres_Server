@@ -1,6 +1,7 @@
 import {
   Args,
   ID,
+  Int,
   Mutation,
   Parent,
   Query,
@@ -25,8 +26,11 @@ export class ProductResolver {
     description: 'Get All Products',
     nullable: true,
   })
-  async getProducts(): Promise<Product[]> {
-    return this.productService.findAll();
+  async getProducts(
+    @Args('take', { type: () => Int, defaultValue: 20 }) take: number,
+    @Args('skip', { type: () => Int, defaultValue: 0 }) skip: number,
+  ): Promise<Product[]> {
+    return this.productService.findAll(take, skip);
   }
 
   @ResolveField(() => [Category], {
