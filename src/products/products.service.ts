@@ -25,7 +25,9 @@ export class ProductsService {
   async findByCategoryId(id: string) {
     return Product.find({
       where: { categories: { id } },
-      relations: ['categories'],
+      relations: {
+        categories: true,
+      },
     });
   }
 

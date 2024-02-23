@@ -10,6 +10,6 @@ export class CreateProductInput {
   price: number;
   @Field()
   product_image: string;
-  @Field()
-  category_id: string;
+  @Field(() => [String])
+  category_id: string[];
 }

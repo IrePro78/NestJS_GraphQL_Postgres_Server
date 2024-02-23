@@ -22,7 +22,7 @@ export class ProductResolver {
   ) {} // private readonly collectionsService: CollectionsService, // private readonly
 
   @Query(() => [Product], {
-    name: 'getProducts',
+    name: 'products',
     description: 'Get All Products',
     nullable: true,
   })
@@ -43,7 +43,7 @@ export class ProductResolver {
   }
 
   @Query(() => Product, {
-    name: 'getProduct',
+    name: 'product',
     description: 'Get Product By ID',
     nullable: true,
   })

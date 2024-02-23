@@ -35,10 +35,10 @@ type Product {
 
 type Query {
   """Get All Products"""
-  getProducts(take: Int! = 20, skip: Int! = 0): [Product!]
+  products(take: Int! = 20, skip: Int! = 0): [Product!]
 
   """Get Product By ID"""
-  getProduct(id: ID!): Product
+  product(id: ID!): Product
 
   """Get All Categories"""
   getCategories: [Category!]
@@ -55,5 +55,5 @@ input CreateProductInput {
   description: String!
   price: Float!
   product_image: String!
-  category_id: String!
+  category_id: [String!]!
 }
