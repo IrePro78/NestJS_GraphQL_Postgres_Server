@@ -4,20 +4,20 @@ import { ProductsService } from '../products/products.service';
 
 @Injectable()
 export class CategoriesService {
-  constructor(private readonly productService: ProductsService) {}
+	constructor(private readonly productService: ProductsService) {}
 
-  async findByProductId(id: string) {
-    return await Category.find({
-      relations: { products: true },
-      where: { products: { id } },
-    });
-  }
+	async findByProductId(id: string) {
+		return await Category.find({
+			relations: { products: true },
+			where: { products: { id } },
+		});
+	}
 
-  async findById(id: string) {
-    return Category.find({ where: { id } });
-  }
+	async findById(id: string) {
+		return Category.find({ where: { id } });
+	}
 
-  async findAll() {
-    return Category.find();
-  }
+	async findAll() {
+		return Category.find();
+	}
 }

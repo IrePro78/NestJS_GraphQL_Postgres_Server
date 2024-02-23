@@ -1,18 +1,18 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { CategoriesResolver } from '../graphql/resolvers/category.resolver';
+import { CategoryResolver } from '../graphql/resolvers/category.resolver';
 
 describe('CategoriesResolver', () => {
-  let resolver: CategoriesResolver;
+	let resolver: CategoryResolver;
 
-  beforeEach(async () => {
-    const module: TestingModule = await Test.createTestingModule({
-      providers: [CategoriesResolver],
-    }).compile();
+	beforeEach(async () => {
+		const module: TestingModule = await Test.createTestingModule({
+			providers: [CategoryResolver],
+		}).compile();
 
-    resolver = module.get<CategoriesResolver>(CategoriesResolver);
-  });
+		resolver = module.get<CategoryResolver>(CategoryResolver);
+	});
 
-  it('should be defined', () => {
-    expect(resolver).toBeDefined();
-  });
+	it('should be defined', () => {
+		expect(resolver).toBeDefined();
+	});
 });

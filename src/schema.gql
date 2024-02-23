@@ -9,6 +9,9 @@ type Category {
   """Name of the category"""
   name: String!
 
+  """Slug of the category"""
+  slug: String!
+
   """Get Products By Category"""
   products: [Product!]
 }
@@ -28,6 +31,9 @@ type Product {
 
   """Image of the product"""
   product_image: String!
+
+  """Slug of the product"""
+  slug: String!
 
   """Get Categories By Product"""
   categories: [Category!]

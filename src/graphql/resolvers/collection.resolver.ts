@@ -4,5 +4,5 @@ import { Resolver } from '@nestjs/graphql';
 
 @Resolver()
 export class CollectionResolver {
-  constructor() {} // private readonly collectionsService: CollectionsService, // private readonly productService: ProductsService,
+	constructor() {} // private readonly collectionsService: CollectionsService, // private readonly productService: ProductsService,
 }
