@@ -1,16 +1,16 @@
 import { Injectable } from '@nestjs/common';
-import { mockProduct } from 'src/_mocks_/products.mocks';
+// import { mockProduct } from 'src/_mocks_/products.mocks';
 import { Product } from '../graphql/models/product.model';
 import { type CreateProductInput } from '../graphql/dto/create-product.input';
 
 @Injectable()
 export class ProductsService {
+	constructor() {}
 	async findOneById(id: string) {
-		const product = await Product.findOne({
+		return Product.findOne({
 			where: { id },
 			relations: ['categories'],
 		});
-		return product;
 	}
 
 	async findAll(
@@ -34,37 +34,49 @@ export class ProductsService {
 			},
 		});
 	}
-	async create(productData: CreateProductInput) {
-		for (const prod of mockProduct) {
-			const productId = await Product.createQueryBuilder()
-				.insert()
-				.into(Product)
-				.values(prod)
-				.execute()
-				.then((res) => res.raw[0].id);
 
-			await Product.createQueryBuilder()
-				.relation(Product, 'categories')
-				.of(productId)
-				.add(prod.category_id)
-				.then((res) => res);
-		}
-		return this.findOneById('productId');
+	async findByCollectionId(id: string) {
+		console.log('id', id);
+
+		return Product.find({
+			where: { collections: { id } },
+			relations: {
+				collections: true,
+			},
+		});
 	}
 
 	// async create(productData: CreateProductInput) {
-	// 	const productId = await Product.createQueryBuilder()
-	// 		.insert()
-	// 		.into(Product)
-	// 		.values(productData)
-	// 		.execute()
-	// 		.then((res) => res.raw[0].id);
+	// 	for (const prod of mockProduct) {
+	// 		const productId = await Product.createQueryBuilder()
+	// 			.insert()
+	// 			.into(Product)
+	// 			.values(prod)
+	// 			.execute()
+	// 			.then((res) => res.raw[0].id);
 
-	// 	await Product.createQueryBuilder()
-	// 		.relation(Product, 'categories')
-	// 		.of(productId)
-	// 		.add(productData.category_id)
-	// 		.then((res) => res);
-	// 	return this.findOneById(productId);
+	// 		await Product.createQueryBuilder()
+	// 			.relation(Product, 'categories')
+	// 			.of(productId)
+	// 			.add(prod.category_id)
+	// 			.then((res) => res);
+	// 	}
+	// 	return this.findOneById('productId');
 	// }
+
+	async create(productData: CreateProductInput) {
+		const productId = await Product.createQueryBuilder()
+			.insert()
+			.into(Product)
+			.values(productData)
+			.execute()
+			.then((res) => res.raw[0].id);
+
+		await Product.createQueryBuilder()
+			.relation(Product, 'categories')
+			.of(productId)
+			.add(productData.category_id)
+			.then((res) => res);
+		return this.findOneById(productId);
+	}
 }

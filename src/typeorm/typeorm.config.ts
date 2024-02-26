@@ -3,8 +3,9 @@ import {
 	type TypeOrmModuleOptions,
 	type TypeOrmOptionsFactory,
 } from '@nestjs/typeorm';
-import { SnakeNamingStrategy } from 'typeorm-naming-strategies';
+// import { SnakeNamingStrategy } from 'typeorm-naming-strategies';
 import { Injectable } from '@nestjs/common';
+import { SnakeNamingStrategy } from 'typeorm-naming-strategies';
 
 @Injectable()
 export class DatabaseConfiguration implements TypeOrmOptionsFactory {

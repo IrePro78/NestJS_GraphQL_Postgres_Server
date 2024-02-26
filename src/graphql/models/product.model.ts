@@ -43,7 +43,8 @@ export class Product extends BaseEntity {
 	@JoinTable()
 	categories: Category[];
 
-	@ManyToMany(() => Collection)
+	@ManyToMany(() => Collection, (collection) => collection.products)
+	@JoinTable()
 	collections?: Collection[];
 
 	@OneToMany(() => OrderItems, (orderItems) => orderItems)

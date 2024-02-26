@@ -6,6 +6,10 @@ import { ProductsService } from '../products/products.service';
 export class CategoriesService {
 	constructor(private readonly productService: ProductsService) {}
 
+	async findAll() {
+		return Category.find();
+	}
+
 	async findByProductId(id: string) {
 		return Category.find({
 			relations: { products: true },
@@ -14,15 +18,9 @@ export class CategoriesService {
 	}
 
 	async findOneById(id: string) {
-		console.log('id', id);
-
-		const cat = await Category.findOneBy({ id });
-		console.log('cat', cat);
-
-		return cat;
-	}
-
-	async findAll() {
-		return Category.find();
+		return Category.findOne({
+			where: { id },
+			relations: { products: true },
+		});
 	}
 }

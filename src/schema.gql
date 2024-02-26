@@ -11,6 +11,9 @@ type Category {
 
   """Slug of the category"""
   slug: String!
+
+  """Get Products By Category"""
+  products: [Product!]
 }
 
 type Product {
@@ -36,6 +39,23 @@ type Product {
   categories: [Category!]
 }
 
+type Collection {
+  """Unique identifier of the collection"""
+  id: ID!
+
+  """Name of the collection"""
+  name: String!
+
+  """Description of the collection"""
+  description: String
+
+  """Slug of the collection"""
+  slug: String!
+
+  """Get Products By Collection"""
+  products: [Product!]
+}
+
 type Query {
   """Get All Products"""
   products(take: Int! = 20, skip: Int! = 0): [Product!]
@@ -47,7 +67,13 @@ type Query {
   categories: [Category!]
 
   """Get Category By ID"""
-  category(id: ID!): [Category!]
+  category(id: ID!): Category
+
+  """Get All Collections"""
+  collections: [Collection!]
+
+  """Get Collection By ID"""
+  collection(id: ID!): Collection
 }
 
 type Mutation {
