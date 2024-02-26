@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
-import { CollectionsService } from './collections.service';
 import { CollectionResolver } from '../graphql/resolvers/collection.resolver';
+import { CollectionsService } from './collections.service';
 
 @Module({
 	providers: [CollectionsService, CollectionResolver],

@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { Product } from '../graphql/models/product.model';
-import { CreateProductInput } from '../graphql/dto/create-product.input';
+
+import { type CreateProductInput } from '../graphql/dto/create-product.input';
 
 @Injectable()
 export class ProductsService {
@@ -13,7 +14,7 @@ export class ProductsService {
 	}
 
 	async findAll(take: number = 20, skip: number = 0): Promise<Product[]> {
-		return await Product.find({
+		return Product.find({
 			relations: {
 				categories: true,
 			},

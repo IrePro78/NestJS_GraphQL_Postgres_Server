@@ -1,7 +1,7 @@
 import { forwardRef, Module } from '@nestjs/common';
-import { CategoriesService } from './categories.service';
 import { CategoryResolver } from '../graphql/resolvers';
 import { ProductsModule } from '../products/products.module';
+import { CategoriesService } from './categories.service';
 
 @Module({
 	imports: [forwardRef(() => ProductsModule)],

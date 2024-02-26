@@ -2,6 +2,7 @@
   "singleQuote": true, 
   "semi": true,         
   "useTabs": true, 
-  "trailingComma": "all",
-  "noMultipleEmptyLines": true 
+  "trailingComma": "all"
+
+  
 }

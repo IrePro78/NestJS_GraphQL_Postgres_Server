@@ -7,7 +7,7 @@ export class CategoriesService {
 	constructor(private readonly productService: ProductsService) {}
 
 	async findByProductId(id: string) {
-		return await Category.find({
+		return Category.find({
 			relations: { products: true },
 			where: { products: { id } },
 		});

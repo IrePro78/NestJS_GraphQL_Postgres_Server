@@ -1,5 +1,8 @@
 import { ConfigService } from '@nestjs/config';
-import { TypeOrmModuleOptions, TypeOrmOptionsFactory } from '@nestjs/typeorm';
+import {
+	type TypeOrmModuleOptions,
+	type TypeOrmOptionsFactory,
+} from '@nestjs/typeorm';
 import { SnakeNamingStrategy } from 'typeorm-naming-strategies';
 import { Injectable } from '@nestjs/common';
 
