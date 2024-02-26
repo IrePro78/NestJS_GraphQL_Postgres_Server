@@ -6,10 +6,10 @@ import {
 	ResolveField,
 	Resolver,
 } from '@nestjs/graphql';
+import { CategoriesService } from 'src/categories/categories.service';
+import { Category } from 'src/graphql/models/category.model';
 import { Product } from 'src/graphql/models/product.model';
-import { Category } from '../models/category.model';
-import { CategoriesService } from '../../categories/categories.service';
-import { ProductsService } from '../../products/products.service';
+import { ProductsService } from 'src/products/products.service';
 
 @Resolver(() => Category)
 export class CategoryResolver {

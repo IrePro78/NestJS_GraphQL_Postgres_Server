@@ -9,7 +9,7 @@ export class ProductsService {
 	async findOneById(id: string) {
 		return Product.findOne({
 			where: { id },
-			relations: ['categories'],
+			relations: { categories: true, collections: true },
 		});
 	}
 
