@@ -11,9 +11,6 @@ type Category {
 
   """Slug of the category"""
   slug: String!
-
-  """Get Products By Category"""
-  products: [Product!]
 }
 
 type Product {
@@ -47,7 +44,10 @@ type Query {
   product(id: ID!): Product
 
   """Get All Categories"""
-  getCategories: [Category!]
+  categories: [Category!]
+
+  """Get Category By ID"""
+  category(id: ID!): [Category!]
 }
 
 type Mutation {
@@ -61,5 +61,6 @@ input CreateProductInput {
   description: String!
   price: Float!
   product_image: String!
+  slug: String!
   category_id: [String!]!
 }

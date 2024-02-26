@@ -38,7 +38,7 @@ export class ProductResolver {
 		description: 'Get Categories By Product',
 		nullable: true,
 	})
-	async categories(@Parent() product: Product) {
+	async getCategories(@Parent() product: Product) {
 		return this.categoryService.findByProductId(product.id);
 	}
 
@@ -47,7 +47,7 @@ export class ProductResolver {
 		description: 'Get Product By ID',
 		nullable: true,
 	})
-	async getProduct(
+	async getProductById(
 		@Args('id', { type: () => ID }) id: string,
 	): Promise<Product> {
 		return this.productService.findOneById(id);

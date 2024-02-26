@@ -13,8 +13,13 @@ export class CategoriesService {
 		});
 	}
 
-	async findById(id: string) {
-		return Category.find({ where: { id } });
+	async findOneById(id: string) {
+		console.log('id', id);
+
+		const cat = await Category.findOneBy({ id });
+		console.log('cat', cat);
+
+		return cat;
 	}
 
 	async findAll() {
