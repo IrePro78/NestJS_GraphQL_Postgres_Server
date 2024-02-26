@@ -10,7 +10,9 @@ import { Injectable } from '@nestjs/common';
 export class DatabaseConfiguration implements TypeOrmOptionsFactory {
 	constructor(private configService: ConfigService) {}
 
-	createTypeOrmOptions(): TypeOrmModuleOptions | Promise<TypeOrmModuleOptions> {
+	createTypeOrmOptions():
+		| TypeOrmModuleOptions
+		| Promise<TypeOrmModuleOptions> {
 		return {
 			type: this.configService.get('DB_TYPE'),
 			host: this.configService.get('DB_HOST'),

@@ -13,7 +13,9 @@ import { Order } from './order.model';
 @ObjectType()
 export class OrderItems extends BaseEntity {
 	@PrimaryGeneratedColumn('uuid')
-	@Field(() => ID, { description: 'Unique identifier of the order item' })
+	@Field(() => ID, {
+		description: 'Unique identifier of the order item',
+	})
 	id: string;
 	@Column()
 	@Field({ description: 'Quantity of the product' })

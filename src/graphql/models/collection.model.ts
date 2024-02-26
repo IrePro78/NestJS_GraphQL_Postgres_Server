@@ -13,7 +13,9 @@ import { Product } from './product.model';
 @ObjectType()
 export class Collection extends BaseEntity {
 	@PrimaryGeneratedColumn('uuid')
-	@Field(() => ID, { description: 'Unique identifier of the collection' })
+	@Field(() => ID, {
+		description: 'Unique identifier of the collection',
+	})
 	id: string;
 
 	@Column()
@@ -21,7 +23,10 @@ export class Collection extends BaseEntity {
 	name: string;
 
 	@Column()
-	@Field({ nullable: true, description: 'Description of the collection' })
+	@Field({
+		nullable: true,
+		description: 'Description of the collection',
+	})
 	description: string;
 
 	@Column()

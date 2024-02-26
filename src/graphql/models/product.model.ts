@@ -1,4 +1,3 @@
-import { Field, Float, ID, ObjectType } from '@nestjs/graphql';
 import {
 	BaseEntity,
 	Column,
@@ -8,21 +7,27 @@ import {
 	OneToMany,
 	PrimaryGeneratedColumn,
 } from 'typeorm';
-import { Category } from './category.model';
+import { Field, Float, ID, ObjectType } from '@nestjs/graphql';
 import { Collection } from './collection.model';
 import { OrderItems } from './order-items.model';
+import { Category } from './category.model';
 
 @Entity('products')
 @ObjectType()
 export class Product extends BaseEntity {
 	@PrimaryGeneratedColumn('uuid')
-	@Field(() => ID, { description: 'Unique identifier of the product' })
+	@Field(() => ID, {
+		description: 'Unique identifier of the product',
+	})
 	id: string;
 	@Column()
 	@Field({ description: 'Name of the product' })
 	name: string;
 	@Column()
-	@Field({ nullable: true, description: 'Description of the product' })
+	@Field({
+		nullable: true,
+		description: 'Description of the product',
+	})
 	description: string;
 	@Column()
 	@Field(() => Float, { description: 'Price of the product' })

@@ -13,7 +13,9 @@ import { Product } from './product.model';
 @ObjectType()
 export class Category extends BaseEntity {
 	@PrimaryGeneratedColumn('uuid')
-	@Field(() => ID, { description: 'Unique identifier of the category' })
+	@Field(() => ID, {
+		description: 'Unique identifier of the category',
+	})
 	id: string;
 
 	@Column()

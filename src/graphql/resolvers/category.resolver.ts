@@ -1,4 +1,9 @@
-import { Parent, Query, ResolveField, Resolver } from '@nestjs/graphql';
+import {
+	Parent,
+	Query,
+	ResolveField,
+	Resolver,
+} from '@nestjs/graphql';
 import { Category } from '../models/category.model';
 import { CategoriesService } from '../../categories/categories.service';
 import { Product } from '../models/product.model';
