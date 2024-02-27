@@ -3,16 +3,10 @@ import { Collection } from 'src/graphql/models/collection.model';
 
 @Injectable()
 export class CollectionsService {
-	// constructor(private readonly productsService: ProductsService) {}
-
-	async findAll() {
-		return Collection.find();
-	}
-
-	async findByProductId(id: string) {
+	async findAll(take: number = 20, skip: number = 0) {
 		return Collection.find({
-			relations: { products: true },
-			where: { products: { id } },
+			take,
+			skip,
 		});
 	}
 
@@ -20,6 +14,13 @@ export class CollectionsService {
 		return Collection.findOne({
 			where: { id },
 			relations: { products: true },
+		});
+	}
+
+	async findByProductId(id: string) {
+		return Collection.find({
+			relations: { products: true },
+			where: { products: { id } },
 		});
 	}
 }

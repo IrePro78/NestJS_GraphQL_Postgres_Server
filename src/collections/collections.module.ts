@@ -6,5 +6,6 @@ import { CollectionsService } from './collections.service';
 @Module({
 	imports: [forwardRef(() => ProductsModule)],
 	providers: [CollectionsService, CollectionResolver],
+	exports: [CollectionsService],
 })
 export class CollectionsModule {}

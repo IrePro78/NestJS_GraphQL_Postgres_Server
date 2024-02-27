@@ -1,6 +1,7 @@
 import {
 	Args,
 	ID,
+	Int,
 	Parent,
 	Query,
 	ResolveField,
@@ -23,8 +24,11 @@ export class CategoryResolver {
 		description: 'Get All Categories',
 		nullable: true,
 	})
-	async getCategories(): Promise<Category[]> {
-		return this.categoryService.findAll();
+	async getCategories(
+		@Args('take', { type: () => Int, defaultValue: 20 }) take: number,
+		@Args('skip', { type: () => Int, defaultValue: 0 }) skip: number,
+	): Promise<Category[]> {
+		return this.categoryService.findAll(take, skip);
 	}
 	@ResolveField(() => [Product], {
 		name: 'products',
@@ -36,7 +40,7 @@ export class CategoryResolver {
 	}
 
 	@Query(() => Category, {
-		name: 'category',
+		name: 'categoryById',
 		description: 'Get Category By ID',
 		nullable: true,
 	})
@@ -44,5 +48,16 @@ export class CategoryResolver {
 		@Args('id', { type: () => ID }) id: string,
 	): Promise<Category> {
 		return this.categoryService.findOneById(id);
+	}
+
+	@Query(() => Category, {
+		name: 'categoryBySlug',
+		description: 'Get Category By ID',
+		nullable: true,
+	})
+	async getCategoryBySlug(
+		@Args('slug', { type: () => String }) slug: string,
+	): Promise<Category> {
+		return this.categoryService.findOneBySlug(slug);
 	}
 }

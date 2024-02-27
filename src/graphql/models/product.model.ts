@@ -39,11 +39,15 @@ export class Product extends BaseEntity {
 	@Field({ description: 'Slug of the product' })
 	slug: string;
 
-	@ManyToMany(() => Category, (category) => category.products)
+	@ManyToMany(() => Category, (category) => category.products, {
+		cascade: true,
+	})
 	@JoinTable()
 	categories: Category[];
 
-	@ManyToMany(() => Collection, (collection) => collection.products)
+	@ManyToMany(() => Collection, (collection) => collection.products, {
+		cascade: true,
+	})
 	@JoinTable()
 	collections?: Collection[];
 

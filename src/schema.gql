@@ -37,6 +37,9 @@ type Product {
 
   """Get Categories By Product"""
   categories: [Category!]
+
+  """Get Collections By Product"""
+  collections: [Collection!]
 }
 
 type Collection {
@@ -64,10 +67,13 @@ type Query {
   product(id: ID!): Product
 
   """Get All Categories"""
-  categories: [Category!]
+  categories(take: Int! = 20, skip: Int! = 0): [Category!]
 
   """Get Category By ID"""
-  category(id: ID!): Category
+  categoryById(id: ID!): Category
+
+  """Get Category By ID"""
+  categoryBySlug(slug: String!): Category
 
   """Get All Collections"""
   collections: [Collection!]

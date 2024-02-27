@@ -8,6 +8,8 @@ import {
 	ResolveField,
 	Resolver,
 } from '@nestjs/graphql';
+import { Collection } from 'src/graphql/models/collection.model';
+import { CollectionsService } from 'src/collections/collections.service';
 import { Product } from '../models/product.model';
 import { ProductsService } from '../../products/products.service';
 import { Category } from '../models/category.model';
@@ -19,7 +21,8 @@ export class ProductResolver {
 	constructor(
 		private readonly productService: ProductsService,
 		private readonly categoryService: CategoriesService,
-	) {} // private readonly collectionsService: CollectionsService, // private readonly
+		private readonly collectionService: CollectionsService,
+	) {}
 
 	@Query(() => [Product], {
 		name: 'products',
@@ -40,6 +43,15 @@ export class ProductResolver {
 	})
 	async getCategories(@Parent() product: Product) {
 		return this.categoryService.findByProductId(product.id);
+	}
+
+	@ResolveField(() => [Collection], {
+		name: 'collections',
+		description: 'Get Collections By Product',
+		nullable: true,
+	})
+	async getCollections(@Parent() product: Product) {
+		return this.collectionService.findByProductId(product.id);
 	}
 
 	@Query(() => Product, {

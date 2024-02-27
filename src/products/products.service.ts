@@ -6,12 +6,6 @@ import { type CreateProductInput } from '../graphql/dto/create-product.input';
 @Injectable()
 export class ProductsService {
 	constructor() {}
-	async findOneById(id: string) {
-		return Product.findOne({
-			where: { id },
-			relations: { categories: true, collections: true },
-		});
-	}
 
 	async findAll(
 		take: number = 20,
@@ -26,6 +20,13 @@ export class ProductsService {
 		});
 	}
 
+	async findOneById(id: string) {
+		return Product.findOne({
+			where: { id },
+			relations: { categories: true, collections: true },
+		});
+	}
+
 	async findByCategoryId(id: string) {
 		return Product.find({
 			where: { categories: { id } },
@@ -36,14 +37,14 @@ export class ProductsService {
 	}
 
 	async findByCollectionId(id: string) {
-		console.log('id', id);
-
-		return Product.find({
+		const prod = await Product.find({
 			where: { collections: { id } },
 			relations: {
 				collections: true,
 			},
 		});
+		console.log(prod);
+		return prod;
 	}
 
 	// async create(productData: CreateProductInput) {

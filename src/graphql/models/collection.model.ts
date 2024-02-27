@@ -3,7 +3,6 @@ import {
 	BaseEntity,
 	Column,
 	Entity,
-	JoinTable,
 	ManyToMany,
 	PrimaryGeneratedColumn,
 } from 'typeorm';
@@ -34,6 +33,6 @@ export class Collection extends BaseEntity {
 	slug: string;
 
 	@ManyToMany(() => Product, (product) => product.collections)
-	@JoinTable()
+	// @JoinTable()
 	products: Product[];
 }
