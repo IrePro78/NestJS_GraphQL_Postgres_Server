@@ -17,6 +17,13 @@ export class CollectionsService {
 		});
 	}
 
+	async findOneBySlug(slug: string) {
+		return Collection.findOne({
+			where: { slug },
+			relations: { products: true },
+		});
+	}
+
 	async findByProductId(id: string) {
 		return Collection.find({
 			relations: { products: true },

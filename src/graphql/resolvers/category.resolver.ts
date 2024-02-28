@@ -35,8 +35,16 @@ export class CategoryResolver {
 		description: 'Get Products By Category',
 		nullable: true,
 	})
-	async getProducts(@Parent() category: Category) {
-		return this.productService.findByCategoryId(category.id);
+	async getProducts(
+		@Parent() category: Category,
+		@Args('take', { type: () => Int, defaultValue: 20 }) take: number,
+		@Args('skip', { type: () => Int, defaultValue: 0 }) skip: number,
+	): Promise<Product[]> {
+		return this.productService.findByCategoryId(
+			category.id,
+			take,
+			skip,
+		);
 	}
 
 	@Query(() => Category, {
@@ -52,7 +60,7 @@ export class CategoryResolver {
 
 	@Query(() => Category, {
 		name: 'categoryBySlug',
-		description: 'Get Category By ID',
+		description: 'Get Category By Slug',
 		nullable: true,
 	})
 	async getCategoryBySlug(

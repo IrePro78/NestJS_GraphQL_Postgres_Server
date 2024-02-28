@@ -27,21 +27,25 @@ export class ProductsService {
 		});
 	}
 
-	async findByCategoryId(id: string) {
+	async findByCategoryId(id: string, take: number, skip: number) {
 		return Product.find({
 			where: { categories: { id } },
 			relations: {
 				categories: true,
 			},
+			take,
+			skip,
 		});
 	}
 
-	async findByCollectionId(id: string) {
+	async findByCollectionId(id: string, take: number, skip: number) {
 		const prod = await Product.find({
 			where: { collections: { id } },
 			relations: {
 				collections: true,
 			},
+			take,
+			skip,
 		});
 		console.log(prod);
 		return prod;

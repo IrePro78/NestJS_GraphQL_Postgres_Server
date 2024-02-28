@@ -13,7 +13,7 @@ type Category {
   slug: String!
 
   """Get Products By Category"""
-  products: [Product!]
+  products(take: Int! = 20, skip: Int! = 0): [Product!]
 }
 
 type Product {
@@ -56,7 +56,7 @@ type Collection {
   slug: String!
 
   """Get Products By Collection"""
-  products: [Product!]
+  products(take: Int! = 20, skip: Int! = 0): [Product!]
 }
 
 type Query {
@@ -72,14 +72,17 @@ type Query {
   """Get Category By ID"""
   categoryById(id: ID!): Category
 
-  """Get Category By ID"""
+  """Get Category By Slug"""
   categoryBySlug(slug: String!): Category
 
   """Get All Collections"""
-  collections: [Collection!]
+  collections(take: Int! = 20, skip: Int! = 0): [Collection!]
 
   """Get Collection By ID"""
   collection(id: ID!): Collection
+
+  """Get Collection By Slug"""
+  collectionBySlug(slug: String!): Collection
 }
 
 type Mutation {

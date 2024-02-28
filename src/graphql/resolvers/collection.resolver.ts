@@ -1,6 +1,7 @@
 import {
 	Args,
 	ID,
+	Int,
 	Parent,
 	Query,
 	ResolveField,
@@ -15,7 +16,7 @@ import { ProductsService } from 'src/products/products.service';
 export class CollectionResolver {
 	constructor(
 		private readonly collectionService: CollectionsService,
-		private readonly procuctService: ProductsService,
+		private readonly productService: ProductsService,
 	) {}
 
 	@Query(() => [Collection], {
@@ -23,16 +24,27 @@ export class CollectionResolver {
 		description: 'Get All Collections',
 		nullable: true,
 	})
-	async getCollections(): Promise<Collection[]> {
-		return this.collectionService.findAll();
+	async getCollections(
+		@Args('take', { type: () => Int, defaultValue: 20 }) take: number,
+		@Args('skip', { type: () => Int, defaultValue: 0 }) skip: number,
+	): Promise<Collection[]> {
+		return this.collectionService.findAll(take, skip);
 	}
 	@ResolveField(() => [Product], {
 		name: 'products',
 		description: 'Get Products By Collection',
 		nullable: true,
 	})
-	async getProducts(@Parent() collection: Collection) {
-		return this.procuctService.findByCollectionId(collection.id);
+	async getProducts(
+		@Parent() collection: Collection,
+		@Args('take', { type: () => Int, defaultValue: 20 }) take: number,
+		@Args('skip', { type: () => Int, defaultValue: 0 }) skip: number,
+	): Promise<Product[]> {
+		return this.productService.findByCollectionId(
+			collection.id,
+			take,
+			skip,
+		);
 	}
 
 	@Query(() => Collection, {
@@ -44,5 +56,16 @@ export class CollectionResolver {
 		@Args('id', { type: () => ID }) id: string,
 	): Promise<Collection> {
 		return this.collectionService.findOneById(id);
+	}
+
+	@Query(() => Collection, {
+		name: 'collectionBySlug',
+		description: 'Get Collection By Slug',
+		nullable: true,
+	})
+	async getCategoryBySlug(
+		@Args('slug', { type: () => String }) slug: string,
+	): Promise<Collection> {
+		return this.collectionService.findOneBySlug(slug);
 	}
 }
