@@ -36,6 +36,19 @@ export class ProductResolver {
 		return this.productService.findAll(take, skip);
 	}
 
+	@Query(() => [Product], {
+		name: 'productsByName',
+		description: 'Get Products By Name',
+		nullable: true,
+	})
+	async getProductsByName(
+		@Args('name', { type: () => String }) name: string,
+		@Args('take', { type: () => Int, defaultValue: 20 }) take: number,
+		@Args('skip', { type: () => Int, defaultValue: 0 }) skip: number,
+	): Promise<Product[]> {
+		return this.productService.findAllByName(name, take, skip);
+	}
+
 	@ResolveField(() => [Category], {
 		name: 'categories',
 		description: 'Get Categories By Product',

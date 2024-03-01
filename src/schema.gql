@@ -63,6 +63,9 @@ type Query {
   """Get All Products"""
   products(take: Int! = 20, skip: Int! = 0): [Product!]
 
+  """Get Products By Name"""
+  productsByName(name: String!, take: Int! = 20, skip: Int! = 0): [Product!]
+
   """Get Product By ID"""
   product(id: ID!): Product
 

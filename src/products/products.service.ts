@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 // import { mockProduct } from 'src/_mocks_/products.mocks';
+import { ILike, Like } from 'typeorm';
 import { Product } from '../graphql/models/product.model';
 import { type CreateProductInput } from '../graphql/dto/create-product.input';
 
@@ -17,6 +18,9 @@ export class ProductsService {
 			},
 			take,
 			skip,
+			order: {
+				price: 'ASC',
+			},
 		});
 	}
 
@@ -24,6 +28,22 @@ export class ProductsService {
 		return Product.findOne({
 			where: { id },
 			relations: { categories: true, collections: true },
+		});
+	}
+
+	async findAllByName(name: string, take: number, skip: number) {
+		return Product.find({
+			where: { name: ILike(`%${name} %`) },
+			relations: {
+				collections: true,
+				categories: true,
+			},
+			take,
+			skip,
+			order: {
+				name: 'ASC',
+				id: 'DESC',
+			},
 		});
 	}
 
@@ -35,20 +55,24 @@ export class ProductsService {
 			},
 			take,
 			skip,
+			order: {
+				price: 'ASC',
+			},
 		});
 	}
 
 	async findByCollectionId(id: string, take: number, skip: number) {
-		const prod = await Product.find({
+		return Product.find({
 			where: { collections: { id } },
 			relations: {
 				collections: true,
 			},
 			take,
 			skip,
+			order: {
+				price: 'ASC',
+			},
 		});
-		console.log(prod);
-		return prod;
 	}
 
 	// async create(productData: CreateProductInput) {
