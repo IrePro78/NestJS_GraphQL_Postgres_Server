@@ -63,7 +63,7 @@ export class CollectionResolver {
 		description: 'Get Collection By Slug',
 		nullable: true,
 	})
-	async getCategoryBySlug(
+	async getCcollectionBySlug(
 		@Args('slug', { type: () => String }) slug: string,
 	): Promise<Collection> {
 		return this.collectionService.findOneBySlug(slug);
