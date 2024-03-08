@@ -33,7 +33,7 @@ export class ProductsService {
 
 	async findAllByName(name: string, take: number, skip: number) {
 		return Product.find({
-			where: { name: ILike(`%${name} %`) },
+			where: { name: ILike(`%${name}%`) },
 			relations: {
 				collections: true,
 				categories: true,
