@@ -2,6 +2,39 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+type Order {
+  """Unique identifier of the order"""
+  id: ID!
+
+  """Total amount of the order"""
+  total: Float!
+
+  """Status of the order"""
+  status: String!
+
+  """Date of the order"""
+  createAt: DateTime!
+
+  """Date of the last update of the order"""
+  updateAt: DateTime!
+
+  """Get Order Items By Order"""
+  orderItems: [OrderItems!]
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+type OrderItems {
+  """Unique identifier of the order item"""
+  id: ID!
+
+  """Quantity of the product"""
+  quantity: Float!
+}
+
 type Category {
   """Unique identifier of the category"""
   id: ID!
@@ -86,11 +119,20 @@ type Query {
 
   """Get Collection By Slug"""
   collectionBySlug(slug: String!): Collection
+
+  """Get All Orders"""
+  orders: [Order!]
+
+  """Get Order By ID"""
+  order(id: ID!): Order
 }
 
 type Mutation {
   """Create Product"""
   createProduct(createProductData: CreateProductInput!): Product
+
+  """Create Order"""
+  createOrder(createOrderData: CreateOrderInput!): Order
 }
 
 """Create product input object type."""
@@ -101,4 +143,9 @@ input CreateProductInput {
   product_image: String!
   slug: String!
   category_id: [String!]!
+}
+
+"""Create product input object type."""
+input CreateOrderInput {
+  total: Float!
 }

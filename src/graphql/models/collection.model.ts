@@ -33,6 +33,5 @@ export class Collection extends BaseEntity {
 	slug: string;
 
 	@ManyToMany(() => Product, (product) => product.collections)
-	// @JoinTable()
 	products: Product[];
 }

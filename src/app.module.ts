@@ -16,6 +16,7 @@ import { CategoriesModule } from './categories/categories.module';
 import { CartsService } from './carts/carts.service';
 import { CartsModule } from './carts/carts.module';
 import { OrdersModule } from './orders/orders.module';
+import { WebhookHandlerModule } from './webhook-handler/webhook-handler.module';
 
 @Module({
 	imports: [
@@ -34,6 +35,7 @@ import { OrdersModule } from './orders/orders.module';
 		CategoriesModule,
 		CartsModule,
 		OrdersModule,
+		WebhookHandlerModule,
 	],
 	controllers: [AppController],
 	providers: [AppService, CartsService],

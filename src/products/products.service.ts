@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 // import { mockProduct } from 'src/_mocks_/products.mocks';
-import { ILike, Like } from 'typeorm';
+import { ILike } from 'typeorm';
 import { Product } from '../graphql/models/product.model';
 import { type CreateProductInput } from '../graphql/dto/create-product.input';
 

@@ -1,10 +1,12 @@
-import { Field, ID, ObjectType } from '@nestjs/graphql';
+import { Field, Float, ID, ObjectType } from '@nestjs/graphql';
 import {
 	BaseEntity,
 	Column,
+	CreateDateColumn,
 	Entity,
 	OneToMany,
 	PrimaryGeneratedColumn,
+	UpdateDateColumn,
 } from 'typeorm';
 import { OrderItems } from './order-items.model';
 
@@ -22,15 +24,25 @@ export class Order extends BaseEntity {
 	id: string;
 
 	@Column()
-	@Field({ description: 'Total amount of the order' })
+	@Field(() => Float, { description: 'Total amount of the order' })
 	total: number;
 
 	@Column('enum', { enum: OrderStatus, default: OrderStatus.PENDING })
 	@Field({
 		description: 'Status of the order',
 	})
-	status: string;
+	status: OrderStatus;
 
-	@OneToMany(() => OrderItems, (orderItems) => orderItems)
-	orderItems: OrderItems[];
+	@CreateDateColumn({ type: 'timestamp' })
+	@Field({ description: 'Date of the order' })
+	createAt: Date;
+
+	@UpdateDateColumn({ type: 'timestamp' })
+	@Field({ description: 'Date of the last update of the order' })
+	updateAt: Date;
+
+	@OneToMany(() => OrderItems, (orderItems) => orderItems.order, {
+		onDelete: 'CASCADE',
+	})
+	orderItems?: OrderItems[];
 }
