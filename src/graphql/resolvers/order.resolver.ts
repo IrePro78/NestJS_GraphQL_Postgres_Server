@@ -8,8 +8,10 @@ import {
 	Resolver,
 } from '@nestjs/graphql';
 import { CreateOrderInput } from 'src/graphql/dto/create-order.input';
+import { CreateOrderItemInput } from 'src/graphql/dto/create_order-item.input';
 import { OrderItems } from 'src/graphql/models/order-items.model';
 import { Order } from 'src/graphql/models/order.model';
+import { Product } from 'src/graphql/models/product.model';
 import { OrdersService } from 'src/orders/orders.service';
 
 @Resolver(() => Order)
@@ -50,6 +52,17 @@ export class OrdersResolver {
 		return this.orderService.findByOrderId(order.id);
 	}
 
+	@ResolveField(() => [Product], {
+		name: 'product',
+		description: 'Get Products By Order Items',
+		nullable: true,
+	})
+	async getProducts(@Parent() orderItems: OrderItems) {
+		return this.orderService.findProductsByOrderItemsId(
+			orderItems.id,
+		);
+	}
+
 	@Mutation(() => Order, {
 		name: 'createOrder',
 		description: 'Create Order',
@@ -59,8 +72,18 @@ export class OrdersResolver {
 		@Args('createOrderData')
 		createOrderData: CreateOrderInput,
 	): Promise<Order> {
-		console.log('createOrderData: ', createOrderData);
-
 		return this.orderService.create(createOrderData);
+	}
+
+	@Mutation(() => OrderItems, {
+		name: 'createOrderItem',
+		description: 'Create Order Item',
+		nullable: true,
+	})
+	async createOrderItem(
+		@Args('createOrderItemData')
+		createOrderItemData: CreateOrderItemInput,
+	): Promise<OrderItems> {
+		return this.orderService.createOrderItem(createOrderItemData);
 	}
 }

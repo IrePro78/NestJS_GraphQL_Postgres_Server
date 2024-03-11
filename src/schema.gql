@@ -20,6 +20,9 @@ type Order {
 
   """Get Order Items By Order"""
   orderItems: [OrderItems!]
+
+  """Get Products By Order Items"""
+  product: [Product!]
 }
 
 """
@@ -133,6 +136,9 @@ type Mutation {
 
   """Create Order"""
   createOrder(createOrderData: CreateOrderInput!): Order
+
+  """Create Order Item"""
+  createOrderItem(createOrderItemData: CreateOrderItemInput!): OrderItems
 }
 
 """Create product input object type."""
@@ -148,4 +154,11 @@ input CreateProductInput {
 """Create product input object type."""
 input CreateOrderInput {
   total: Float!
+}
+
+"""Create order item input object type."""
+input CreateOrderItemInput {
+  orderId: ID!
+  productId: ID!
+  quantity: Int!
 }

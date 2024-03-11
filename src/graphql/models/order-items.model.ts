@@ -21,9 +21,9 @@ export class OrderItems extends BaseEntity {
 	@Field({ description: 'Quantity of the product' })
 	quantity: number;
 
-	@ManyToOne(() => Product, (product) => product)
+	@ManyToOne(() => Product, (product) => product.orderItems)
 	product: Product;
 
-	@ManyToOne(() => Order, (order) => order)
+	@ManyToOne(() => Order, (order) => order.orderItems)
 	order: Order;
 }
