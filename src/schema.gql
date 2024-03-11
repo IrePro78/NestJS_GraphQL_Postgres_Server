@@ -7,7 +7,7 @@ type Order {
   id: ID!
 
   """Total amount of the order"""
-  total: Float!
+  totalAmount: Float!
 
   """Status of the order"""
   status: String!
@@ -20,9 +20,6 @@ type Order {
 
   """Get Order Items By Order"""
   orderItems: [OrderItems!]
-
-  """Get Products By Order Items"""
-  product: [Product!]
 }
 
 """
@@ -36,6 +33,9 @@ type OrderItems {
 
   """Quantity of the product"""
   quantity: Float!
+
+  """Get Order Items By Order"""
+  product: [Product!]
 }
 
 type Category {
@@ -153,7 +153,7 @@ input CreateProductInput {
 
 """Create product input object type."""
 input CreateOrderInput {
-  total: Float!
+  totalAmount: Float!
 }
 
 """Create order item input object type."""

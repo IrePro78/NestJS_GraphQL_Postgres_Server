@@ -23,9 +23,9 @@ export class Order extends BaseEntity {
 	@Field(() => ID, { description: 'Unique identifier of the order' })
 	id: string;
 
-	@Column()
+	@Column({ type: 'float', default: 0 })
 	@Field(() => Float, { description: 'Total amount of the order' })
-	total: number;
+	totalAmount: number;
 
 	@Column('enum', { enum: OrderStatus, default: OrderStatus.PENDING })
 	@Field({

@@ -6,8 +6,6 @@ import { type CreateProductInput } from '../graphql/dto/create-product.input';
 
 @Injectable()
 export class ProductsService {
-	constructor() {}
-
 	async findAll(
 		take: number = 20,
 		skip: number = 0,
@@ -73,6 +71,16 @@ export class ProductsService {
 				price: 'ASC',
 			},
 		});
+	}
+
+	async findProductsByOrderItemsId(id: string) {
+		const products = await Product.find({
+			where: { orderItems: { id } },
+			relations: { orderItems: true },
+		});
+		console.log('products: ', products);
+
+		return products;
 	}
 
 	// async create(productData: CreateProductInput) {

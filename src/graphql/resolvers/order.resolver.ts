@@ -11,17 +11,12 @@ import { CreateOrderInput } from 'src/graphql/dto/create-order.input';
 import { CreateOrderItemInput } from 'src/graphql/dto/create_order-item.input';
 import { OrderItems } from 'src/graphql/models/order-items.model';
 import { Order } from 'src/graphql/models/order.model';
-import { Product } from 'src/graphql/models/product.model';
+
 import { OrdersService } from 'src/orders/orders.service';
 
 @Resolver(() => Order)
 export class OrdersResolver {
-	constructor(
-		private readonly orderService: OrdersService,
-		// private readonly productService: ProductsService,
-		// private readonly categoryService: CategoriesService,
-		// private readonly collectionService: CollectionsService,
-	) {}
+	constructor(private readonly orderService: OrdersService) {}
 
 	@Query(() => [Order], {
 		name: 'orders',
@@ -50,17 +45,6 @@ export class OrdersResolver {
 	})
 	async getOrderItems(@Parent() order: Order) {
 		return this.orderService.findByOrderId(order.id);
-	}
-
-	@ResolveField(() => [Product], {
-		name: 'product',
-		description: 'Get Products By Order Items',
-		nullable: true,
-	})
-	async getProducts(@Parent() orderItems: OrderItems) {
-		return this.orderService.findProductsByOrderItemsId(
-			orderItems.id,
-		);
 	}
 
 	@Mutation(() => Order, {
