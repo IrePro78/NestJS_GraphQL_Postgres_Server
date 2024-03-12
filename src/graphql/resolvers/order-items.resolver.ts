@@ -13,7 +13,7 @@ export class OrderItemsResolver {
 
 	@ResolveField(() => [Product], {
 		name: 'product',
-		description: 'Get Order Items By Order',
+		description: 'Get Product By Order Items ID',
 		nullable: true,
 	})
 	async getOrderItems(@Parent() orderItems: OrderItems) {

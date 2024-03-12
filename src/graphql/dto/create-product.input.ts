@@ -1,4 +1,4 @@
-import { Field, InputType } from '@nestjs/graphql';
+import { Field, InputType, Float } from '@nestjs/graphql';
 
 @InputType({ description: 'Create product input object type.' })
 export class CreateProductInput {
@@ -6,7 +6,7 @@ export class CreateProductInput {
 	name: string;
 	@Field()
 	description: string;
-	@Field()
+	@Field(() => Float)
 	price: number;
 	@Field()
 	product_image: string;

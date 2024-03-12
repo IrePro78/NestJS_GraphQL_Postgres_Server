@@ -34,11 +34,13 @@ export class Order extends BaseEntity {
 	status: OrderStatus;
 
 	@CreateDateColumn({ type: 'timestamp' })
-	@Field({ description: 'Date of the order' })
+	@Field(() => Date, { description: 'Date of the order' })
 	createAt: Date;
 
 	@UpdateDateColumn({ type: 'timestamp' })
-	@Field({ description: 'Date of the last update of the order' })
+	@Field(() => Date, {
+		description: 'Date of the last update of the order',
+	})
 	updateAt: Date;
 
 	@OneToMany(() => OrderItems, (orderItems) => orderItems.order, {

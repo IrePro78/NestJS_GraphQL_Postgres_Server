@@ -33,10 +33,12 @@ export class OrdersService {
 	}
 
 	async createOrderItem(createOrderItemData: CreateOrderItemInput) {
-		const { productId, orderId, quantity } = createOrderItemData;
+		const { productId, orderId, quantity, total } =
+			createOrderItemData;
 
 		const itm = await OrderItems.save({
 			quantity,
+			total,
 			product: { id: productId },
 			order: { id: orderId },
 		});

@@ -1,4 +1,4 @@
-import { Field, ID, ObjectType } from '@nestjs/graphql';
+import { Field, Float, ID, Int, ObjectType } from '@nestjs/graphql';
 import {
 	BaseEntity,
 	Column,
@@ -17,13 +17,19 @@ export class OrderItems extends BaseEntity {
 		description: 'Unique identifier of the order item',
 	})
 	id: string;
-	@Column()
-	@Field({ description: 'Quantity of the product' })
+	@Column({ type: 'int', default: 0 })
+	@Field(() => Int, { description: 'Quantity of the product' })
 	quantity: number;
 
-	@ManyToOne(() => Product, (product) => product.orderItems)
+	@Column({ type: 'float', default: 0 })
+	@Field(() => Float, {
+		description: 'Total amount of the order item',
+	})
+	total: number;
+
+	@ManyToOne(() => Product, (product) => product)
 	product: Product;
 
-	@ManyToOne(() => Order, (order) => order.orderItems)
+	@ManyToOne(() => Order, (order) => order)
 	order: Order;
 }

@@ -32,9 +32,12 @@ type OrderItems {
   id: ID!
 
   """Quantity of the product"""
-  quantity: Float!
+  quantity: Int!
 
-  """Get Order Items By Order"""
+  """Total amount of the order item"""
+  total: Float!
+
+  """Get Product By Order Items ID"""
   product: [Product!]
 }
 
@@ -161,4 +164,5 @@ input CreateOrderItemInput {
   orderId: ID!
   productId: ID!
   quantity: Int!
+  total: Float!
 }

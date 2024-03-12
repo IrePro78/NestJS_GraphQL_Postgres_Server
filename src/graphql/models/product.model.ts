@@ -29,7 +29,7 @@ export class Product extends BaseEntity {
 		description: 'Description of the product',
 	})
 	description: string;
-	@Column()
+	@Column({ type: 'double precision' })
 	@Field(() => Float, { description: 'Price of the product' })
 	price: number;
 	@Column()
@@ -51,6 +51,8 @@ export class Product extends BaseEntity {
 	@JoinTable()
 	collections?: Collection[];
 
-	@OneToMany(() => OrderItems, (orderItems) => orderItems.product)
+	@OneToMany(() => OrderItems, (orderItems) => orderItems.product, {
+		cascade: true,
+	})
 	orderItems?: OrderItems[];
 }
