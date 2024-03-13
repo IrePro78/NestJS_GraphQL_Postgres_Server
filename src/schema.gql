@@ -145,6 +145,9 @@ type Mutation {
 
   """Update Order Item By Order ID"""
   updateOrderItem(updateOrderItemData: UpdateOrderItemInput!): OrderItems
+
+  """Remove Order Item By ID"""
+  removeOrderItem(itemId: ID!): OrderItems
 }
 
 """Create product input object type."""

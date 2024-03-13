@@ -57,4 +57,10 @@ export class OrdersService {
 			total: item.product.price * quantity,
 		});
 	}
+
+	async removeOrderItem(itemId: string) {
+		const item = await OrderItems.delete({ id: itemId });
+		console.log('item', item);
+		return item.raw[0];
+	}
 }
