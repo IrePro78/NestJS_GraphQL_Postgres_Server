@@ -73,12 +73,11 @@ export class ProductsService {
 		});
 	}
 
-	async findProductsByOrderItemsId(id: string) {
+	async findProductByOrderItemsId(id: string) {
 		const products = await Product.find({
 			where: { orderItems: { id } },
 			relations: { orderItems: true },
 		});
-		console.log('products: ', products);
 
 		return products;
 	}

@@ -142,6 +142,9 @@ type Mutation {
 
   """Create Order Item"""
   createOrderItem(createOrderItemData: CreateOrderItemInput!): OrderItems
+
+  """Update Order Item By Order ID"""
+  updateOrderItem(updateOrderItemData: UpdateOrderItemInput!): OrderItems
 }
 
 """Create product input object type."""
@@ -165,4 +168,10 @@ input CreateOrderItemInput {
   productId: ID!
   quantity: Int!
   total: Float!
+}
+
+"""Update order item input object type."""
+input UpdateOrderItemInput {
+  itemId: ID!
+  quantity: Int!
 }

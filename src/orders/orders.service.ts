@@ -1,8 +1,9 @@
 import { Injectable } from '@nestjs/common';
 import { type CreateOrderInput } from 'src/graphql/dto/create-order.input';
-import { type CreateOrderItemInput } from 'src/graphql/dto/create_order-item.input';
+import { type CreateOrderItemInput } from 'src/graphql/dto/create-order-item.input';
 import { OrderItems } from 'src/graphql/models/order-items.model';
 import { Order } from 'src/graphql/models/order.model';
+import { type UpdateOrderItemInput } from 'src/graphql/dto/update-order-item.input';
 
 @Injectable()
 export class OrdersService {
@@ -36,13 +37,24 @@ export class OrdersService {
 		const { productId, orderId, quantity, total } =
 			createOrderItemData;
 
-		const itm = await OrderItems.save({
+		return OrderItems.save({
 			quantity,
 			total,
 			product: { id: productId },
 			order: { id: orderId },
 		});
+	}
 
-		return itm;
+	async updateOrderItem(updateOrderItemData: UpdateOrderItemInput) {
+		const { itemId, quantity } = updateOrderItemData;
+		const item = await OrderItems.findOne({
+			where: { id: itemId },
+			relations: { product: true },
+		});
+		return OrderItems.save({
+			...item,
+			quantity,
+			total: item.product.price * quantity,
+		});
 	}
 }

@@ -8,7 +8,7 @@ import {
 	Resolver,
 } from '@nestjs/graphql';
 import { CreateOrderInput } from 'src/graphql/dto/create-order.input';
-import { CreateOrderItemInput } from 'src/graphql/dto/create_order-item.input';
+import { CreateOrderItemInput } from 'src/graphql/dto/create-order-item.input';
 import { OrderItems } from 'src/graphql/models/order-items.model';
 import { Order } from 'src/graphql/models/order.model';
 
