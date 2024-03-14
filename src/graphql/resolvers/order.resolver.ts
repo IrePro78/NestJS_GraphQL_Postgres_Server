@@ -58,16 +58,4 @@ export class OrdersResolver {
 	): Promise<Order> {
 		return this.orderService.create(createOrderData);
 	}
-
-	@Mutation(() => OrderItems, {
-		name: 'createOrderItem',
-		description: 'Create Order Item',
-		nullable: true,
-	})
-	async createOrderItem(
-		@Args('createOrderItemData')
-		createOrderItemData: CreateOrderItemInput,
-	): Promise<OrderItems> {
-		return this.orderService.createOrderItem(createOrderItemData);
-	}
 }

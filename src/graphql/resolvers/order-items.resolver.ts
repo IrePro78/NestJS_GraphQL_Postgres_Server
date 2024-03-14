@@ -3,11 +3,11 @@ import {
 	ID,
 	Mutation,
 	Parent,
-	Query,
 	ResolveField,
 	Resolver,
 } from '@nestjs/graphql';
-import { query } from 'express';
+import { CreateOrderItemInput } from 'src/graphql/dto/create-order-item.input';
+
 import { UpdateOrderItemInput } from 'src/graphql/dto/update-order-item.input';
 import { OrderItems } from 'src/graphql/models/order-items.model';
 import { Product } from 'src/graphql/models/product.model';
@@ -30,6 +30,18 @@ export class OrderItemsResolver {
 		return this.productService.findProductByOrderItemsId(
 			orderItems.id,
 		);
+	}
+
+	@Mutation(() => OrderItems, {
+		name: 'createOrderItem',
+		description: 'Create Order Item',
+		nullable: true,
+	})
+	async createOrderItem(
+		@Args('createOrderItemData')
+		createOrderItemData: CreateOrderItemInput,
+	): Promise<OrderItems> {
+		return this.orderService.createOrderItem(createOrderItemData);
 	}
 
 	@Mutation(() => OrderItems, {

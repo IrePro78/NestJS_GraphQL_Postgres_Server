@@ -1,6 +1,8 @@
 import { Injectable } from '@nestjs/common';
 // import { mockProduct } from 'src/_mocks_/products.mocks';
 import { ILike } from 'typeorm';
+import { Review } from 'src/graphql/models/review.model';
+import { type CreateReviewInput } from 'src/graphql/dto/create-review.input ';
 import { Product } from '../graphql/models/product.model';
 import { type CreateProductInput } from '../graphql/dto/create-product.input';
 
@@ -80,6 +82,30 @@ export class ProductsService {
 		});
 
 		return products;
+	}
+
+	async findReviewsByProductId(id: string) {
+		return Review.find({
+			where: { product: { id } },
+		});
+	}
+
+	async createProductReview(reviewData: CreateReviewInput) {
+		const { productId, title, content, name, email, rating } =
+			reviewData;
+
+		const review = await Review.save({
+			title,
+			content,
+			name,
+			email,
+			rating,
+			product: { id: productId },
+		});
+
+		console.log('review', review);
+
+		return review;
 	}
 
 	// async create(productData: CreateProductInput) {

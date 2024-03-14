@@ -8,6 +8,7 @@ import {
 	PrimaryGeneratedColumn,
 } from 'typeorm';
 import { Field, Float, ID, ObjectType } from '@nestjs/graphql';
+import { Review } from 'src/graphql/models/review.model';
 import { Collection } from './collection.model';
 import { OrderItems } from './order-items.model';
 import { Category } from './category.model';
@@ -61,4 +62,9 @@ export class Product extends BaseEntity {
 		cascade: true,
 	})
 	orderItems?: OrderItems[];
+
+	@OneToMany(() => Review, (review) => review.product, {
+		cascade: true,
+	})
+	reviews: Review[];
 }

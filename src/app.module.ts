@@ -13,8 +13,6 @@ import { ProductsModule } from './products/products.module';
 import { CollectionsModule } from './collections/collections.module';
 import { DatabaseConfiguration } from './typeorm/typeorm.config';
 import { CategoriesModule } from './categories/categories.module';
-import { CartsService } from './carts/carts.service';
-import { CartsModule } from './carts/carts.module';
 import { OrdersModule } from './orders/orders.module';
 import { WebhookHandlerModule } from './webhook-handler/webhook-handler.module';
 
@@ -33,11 +31,10 @@ import { WebhookHandlerModule } from './webhook-handler/webhook-handler.module';
 		ProductsModule,
 		CollectionsModule,
 		CategoriesModule,
-		CartsModule,
 		OrdersModule,
 		WebhookHandlerModule,
 	],
 	controllers: [AppController],
-	providers: [AppService, CartsService],
+	providers: [AppService],
 })
 export class AppModule {}
