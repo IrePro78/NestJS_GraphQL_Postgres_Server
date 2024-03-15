@@ -10,12 +10,12 @@ import {
 } from 'typeorm';
 
 enum Rating {
-	ZERO = 'ZERO',
-	ONE = 'ONE',
-	TWO = 'TWO',
-	TREE = 'TREE',
-	FOUR = 'FOUR',
-	FIVE = 'FIVE',
+	ZERO = 0,
+	ONE = 1,
+	TWO = 2,
+	TREE = 3,
+	FOUR = 4,
+	FIVE = 5,
 }
 
 @Entity('reviews')
