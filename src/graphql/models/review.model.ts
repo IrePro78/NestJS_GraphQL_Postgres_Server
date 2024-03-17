@@ -1,4 +1,4 @@
-import { Field, ID, ObjectType } from '@nestjs/graphql';
+import { Field, ID, Int, ObjectType } from '@nestjs/graphql';
 import { Product } from 'src/graphql/models/product.model';
 import {
 	BaseEntity,
@@ -9,8 +9,8 @@ import {
 	PrimaryGeneratedColumn,
 } from 'typeorm';
 
-enum Rating {
-	ZERO,
+export enum Rating {
+	ZERO = 0,
 	ONE,
 	TWO,
 	TREE,
@@ -27,7 +27,7 @@ export class Review extends BaseEntity {
 
 	@Column()
 	@Field({ description: 'Name of the review' })
-	title: string;
+	headline: string;
 
 	@Column()
 	@Field({
@@ -36,9 +36,9 @@ export class Review extends BaseEntity {
 	})
 	content: string;
 
-	@Column('enum', { enum: Rating, default: Rating[Rating.ZERO] })
-	@Field({ description: 'Rating of the review' })
-	rating: number;
+	@Column('enum', { enum: Rating, default: Rating.ZERO })
+	@Field(() => Int, { description: 'Rating of the review' })
+	rating: Rating;
 
 	@Column()
 	@Field({ description: 'User name of the review' })

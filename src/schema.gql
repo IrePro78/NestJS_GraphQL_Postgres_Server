@@ -7,13 +7,13 @@ type Review {
   id: ID!
 
   """Name of the review"""
-  title: String!
+  headline: String!
 
   """Description of the review"""
   content: String
 
   """Rating of the review"""
-  rating: Float!
+  rating: Int!
 
   """User name of the review"""
   name: String!
@@ -164,7 +164,7 @@ type Mutation {
   createProduct(createProductData: CreateProductInput!): Product
 
   """Create Review"""
-  createProductReview(createProductReviewData: CreateReviewInput!): Review
+  createProductReview(createReviewData: CreateReviewInput!): Review
 
   """Create Order"""
   createOrder(createOrderData: CreateOrderInput!): Order
@@ -191,9 +191,9 @@ input CreateProductInput {
 
 """Create Review Input"""
 input CreateReviewInput {
-  title: String!
+  headline: String!
   content: String!
-  rating: Float!
+  rating: Int!
   name: String!
   email: String!
   productId: ID!

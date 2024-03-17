@@ -91,11 +91,11 @@ export class ProductsService {
 	}
 
 	async createProductReview(reviewData: CreateReviewInput) {
-		const { productId, title, content, name, email, rating } =
+		const { productId, headline, content, name, email, rating } =
 			reviewData;
 
 		const review = await Review.save({
-			title,
+			headline,
 			content,
 			name,
 			email,

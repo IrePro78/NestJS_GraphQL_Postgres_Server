@@ -24,7 +24,7 @@ export class ReviewResolver {
 		nullable: true,
 	})
 	async createReview(
-		@Args('createProductReviewData')
+		@Args('createReviewData')
 		createReviewData: CreateReviewInput,
 	): Promise<Review> {
 		console.log('createReviewData', createReviewData);
