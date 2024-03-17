@@ -1,13 +1,13 @@
 import { Field, ID, InputType } from '@nestjs/graphql';
 
-@InputType({ description: 'Create product input object type.' })
+@InputType({ description: 'Create Review Input' })
 export class CreateReviewInput {
 	@Field()
 	title: string;
 	@Field()
 	content: string;
 	@Field()
-	rating: string;
+	rating: number;
 	@Field()
 	name: string;
 	@Field()

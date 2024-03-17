@@ -13,7 +13,7 @@ type Review {
   content: String
 
   """Rating of the review"""
-  rating: String!
+  rating: Float!
 
   """User name of the review"""
   name: String!
@@ -189,11 +189,11 @@ input CreateProductInput {
   category_id: [String!]!
 }
 
-"""Create product input object type."""
+"""Create Review Input"""
 input CreateReviewInput {
   title: String!
   content: String!
-  rating: String!
+  rating: Float!
   name: String!
   email: String!
   productId: ID!

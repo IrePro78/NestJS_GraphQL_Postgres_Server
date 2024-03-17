@@ -10,12 +10,12 @@ import {
 } from 'typeorm';
 
 enum Rating {
-	ZERO = 0,
-	ONE = 1,
-	TWO = 2,
-	TREE = 3,
-	FOUR = 4,
-	FIVE = 5,
+	ZERO,
+	ONE,
+	TWO,
+	TREE,
+	FOUR,
+	FIVE,
 }
 
 @Entity('reviews')
@@ -36,9 +36,9 @@ export class Review extends BaseEntity {
 	})
 	content: string;
 
-	@Column('enum', { enum: Rating, default: Rating.ZERO })
+	@Column('enum', { enum: Rating, default: Rating[Rating.ZERO] })
 	@Field({ description: 'Rating of the review' })
-	rating: string;
+	rating: number;
 
 	@Column()
 	@Field({ description: 'User name of the review' })
