@@ -7,6 +7,7 @@ import {
 	type ApolloDriverConfig,
 } from '@nestjs/apollo';
 import { ApolloServerPluginLandingPageLocalDefault } from '@apollo/server/plugin/landingPage/default';
+import { DateScalar } from 'src/graphql/scalars/date-scalar';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { ProductsModule } from './products/products.module';

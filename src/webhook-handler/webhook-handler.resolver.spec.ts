@@ -1,4 +1,4 @@
-import { Test, TestingModule } from '@nestjs/testing';
+import { Test, type TestingModule } from '@nestjs/testing';
 import { WebhookHandlerResolver } from '../graphql/resolvers/webhook-handler.resolver';
 
 describe('WebhookHandlerResolver', () => {
