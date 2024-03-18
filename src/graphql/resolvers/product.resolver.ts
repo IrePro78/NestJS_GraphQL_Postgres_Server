@@ -10,6 +10,7 @@ import {
 } from '@nestjs/graphql';
 import { Collection } from 'src/graphql/models/collection.model';
 import { CollectionsService } from 'src/collections/collections.service';
+import { Review } from 'src/graphql/models/review.model';
 import { Product } from '../models/product.model';
 import { ProductsService } from '../../products/products.service';
 import { Category } from '../models/category.model';
@@ -65,6 +66,15 @@ export class ProductResolver {
 	})
 	async getCollections(@Parent() product: Product) {
 		return this.collectionService.findByProductId(product.id);
+	}
+
+	@ResolveField(() => [Review], {
+		name: 'reviews',
+		description: 'Get Reviews By Product',
+		nullable: true,
+	})
+	async getReviews(@Parent() product: Product) {
+		return this.productService.findReviewsByProductId(product.id);
 	}
 
 	@Query(() => Product, {

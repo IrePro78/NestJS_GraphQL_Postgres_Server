@@ -15,6 +15,7 @@ export class ProductsService {
 		return Product.find({
 			relations: {
 				categories: true,
+				reviews: true,
 			},
 			take,
 			skip,
@@ -27,7 +28,11 @@ export class ProductsService {
 	async findOneById(id: string) {
 		return Product.findOne({
 			where: { id },
-			relations: { categories: true, collections: true },
+			relations: {
+				categories: true,
+				collections: true,
+				reviews: true,
+			},
 		});
 	}
 
@@ -37,6 +42,7 @@ export class ProductsService {
 			relations: {
 				collections: true,
 				categories: true,
+				reviews: true,
 			},
 			take,
 			skip,
@@ -52,6 +58,8 @@ export class ProductsService {
 			where: { categories: { id } },
 			relations: {
 				categories: true,
+				collections: true,
+				reviews: true,
 			},
 			take,
 			skip,
@@ -66,6 +74,8 @@ export class ProductsService {
 			where: { collections: { id } },
 			relations: {
 				collections: true,
+				categories: true,
+				reviews: true,
 			},
 			take,
 			skip,

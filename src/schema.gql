@@ -102,6 +102,9 @@ type Product {
 
   """Get Collections By Product"""
   collections: [Collection!]
+
+  """Get Reviews By Product"""
+  reviews: [Review!]
 }
 
 type Collection {
