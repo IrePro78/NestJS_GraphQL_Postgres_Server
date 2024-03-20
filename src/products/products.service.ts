@@ -47,26 +47,26 @@ export class ProductsService {
 			// 		take,
 			// 		skip,
 			// 		order: {
-			// 			reviews: { rating: { direction: 'ASC' } },
+			// 			reviews: { rating: 'ASC' },
 			// 		},
 			// 	});
 
 			case 'rating':
-				return Product.createQueryBuilder('product')
-					.leftJoinAndSelect('product.reviews', 'review')
-					.addSelect('AVG(review.rating)', 'rating')
-					.groupBy('review.id')
-					.addGroupBy('product.id')
-					.orderBy('rating', 'ASC')
-					.skip(skip)
-					.take(take)
-					.getMany();
-
-			// .leftJoinAndSelect('product.reviews', 'review')
-			// .orderBy('review.rating', 'DESC')
-			// .take(take)
-			// .skip(skip)
-			// .getMany();
+				return (
+					Product.createQueryBuilder('product')
+						.innerJoin('product.reviews', 'review')
+						.select('product.*') // select all product fields
+						.addSelect('COALESCE(AVG(review.rating), 1)', 'rating')
+						.groupBy('product.id')
+						// .addGroupBy('review.id')
+						// .having('AVG(review.rating) >= :ratingThreshold', {
+						// 	ratingThreshold: 0,
+						// })
+						.orderBy('rating', 'DESC')
+						.take(take)
+						.skip(skip)
+						.getRawMany()
+				);
 
 			default:
 				return Product.find({
