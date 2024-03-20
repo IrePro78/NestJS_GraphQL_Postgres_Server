@@ -11,18 +11,76 @@ export class ProductsService {
 	async findAll(
 		take: number = 20,
 		skip: number = 0,
+		sort: string,
 	): Promise<Product[]> {
-		return Product.find({
-			relations: {
-				categories: true,
-				reviews: true,
-			},
-			take,
-			skip,
-			order: {
-				price: 'ASC',
-			},
-		});
+		switch (sort) {
+			case 'price':
+				return Product.find({
+					relations: {
+						categories: true,
+						reviews: true,
+					},
+					take,
+					skip,
+					order: {
+						price: 'ASC',
+					},
+				});
+			case 'name':
+				return Product.find({
+					relations: {
+						categories: true,
+						reviews: true,
+					},
+					take,
+					skip,
+					order: {
+						name: 'ASC',
+					},
+				});
+			// case 'rating':
+			// 	return Product.find({
+			// 		relations: {
+			// 			categories: true,
+			// 			reviews: true,
+			// 		},
+			// 		take,
+			// 		skip,
+			// 		order: {
+			// 			reviews: { rating: { direction: 'ASC' } },
+			// 		},
+			// 	});
+
+			case 'rating':
+				return Product.createQueryBuilder('product')
+					.leftJoinAndSelect('product.reviews', 'review')
+					.addSelect('AVG(review.rating)', 'rating')
+					.groupBy('review.id')
+					.addGroupBy('product.id')
+					.orderBy('rating', 'ASC')
+					.skip(skip)
+					.take(take)
+					.getMany();
+
+			// .leftJoinAndSelect('product.reviews', 'review')
+			// .orderBy('review.rating', 'DESC')
+			// .take(take)
+			// .skip(skip)
+			// .getMany();
+
+			default:
+				return Product.find({
+					relations: {
+						categories: true,
+						reviews: true,
+					},
+					take,
+					skip,
+					order: {
+						id: Math.random() < 0.5 ? 'DESC' : 'ASC',
+					},
+				});
+		}
 	}
 
 	async findOneById(id: string) {

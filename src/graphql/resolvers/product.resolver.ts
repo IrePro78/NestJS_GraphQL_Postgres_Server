@@ -33,8 +33,10 @@ export class ProductResolver {
 	async getProducts(
 		@Args('take', { type: () => Int, defaultValue: 20 }) take: number,
 		@Args('skip', { type: () => Int, defaultValue: 0 }) skip: number,
+		@Args('sort', { type: () => String, defaultValue: 'default' })
+		sort: string,
 	): Promise<Product[]> {
-		return this.productService.findAll(take, skip);
+		return this.productService.findAll(take, skip, sort);
 	}
 
 	@Query(() => [Product], {

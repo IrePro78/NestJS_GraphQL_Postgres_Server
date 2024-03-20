@@ -13,7 +13,7 @@ type Review {
   content: String
 
   """Rating of the review"""
-  rating: Int!
+  rating: Float!
 
   """User name of the review"""
   name: String!
@@ -126,7 +126,7 @@ type Collection {
 
 type Query {
   """Get All Products"""
-  products(take: Int! = 20, skip: Int! = 0): [Product!]
+  products(take: Int! = 20, skip: Int! = 0, sort: String! = "default"): [Product!]
 
   """Get Products By Name"""
   productsByName(name: String!, take: Int! = 20, skip: Int! = 0): [Product!]

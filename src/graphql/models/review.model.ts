@@ -36,9 +36,9 @@ export class Review extends BaseEntity {
 	})
 	content: string;
 
-	@Column('enum', { enum: Rating, default: Rating.ZERO })
-	@Field(() => Int, { description: 'Rating of the review' })
-	rating: Rating;
+	@Column({ type: 'int', default: 0 })
+	@Field({ description: 'Rating of the review' })
+	rating: number;
 
 	@Column()
 	@Field({ description: 'User name of the review' })
