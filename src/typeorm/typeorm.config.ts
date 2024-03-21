@@ -24,8 +24,8 @@ export class DatabaseConfiguration implements TypeOrmOptionsFactory {
 			entities: [this.configService.get('TYPEORM_ENTITIES')],
 			autoLoadEntities: true,
 			bigNumberStrings: false,
-			// logging: ['log', 'error', 'warn', 'info'], // true to all logging
-			logging: true, // true to all logging
+			logging: ['log', 'error', 'warn', 'info'], // true to all logging
+			// logging: true, // true to all logging
 			synchronize: true,
 			namingStrategy: new SnakeNamingStrategy(),
 		} as TypeOrmModuleOptions;

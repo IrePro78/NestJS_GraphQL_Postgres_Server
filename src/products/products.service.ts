@@ -9,10 +9,14 @@ import { type CreateProductInput } from '../graphql/dto/create-product.input';
 @Injectable()
 export class ProductsService {
 	async findAll(
-		take: number = 20,
-		skip: number = 0,
+		take: number,
+		skip: number,
 		sort: string,
 	): Promise<Product[]> {
+		const rating: string = 'desc';
+
+		console.log('take', take, 'skip', skip, 'sort', sort);
+
 		switch (sort) {
 			case 'price':
 				return Product.find({
@@ -38,35 +42,22 @@ export class ProductsService {
 						name: 'ASC',
 					},
 				});
-			// case 'rating':
-			// 	return Product.find({
-			// 		relations: {
-			// 			categories: true,
-			// 			reviews: true,
-			// 		},
-			// 		take,
-			// 		skip,
-			// 		order: {
-			// 			reviews: { rating: 'ASC' },
-			// 		},
-			// 	});
 
 			case 'rating':
-				return (
-					Product.createQueryBuilder('product')
-						.innerJoin('product.reviews', 'review')
-						.select('product.*') // select all product fields
-						.addSelect('COALESCE(AVG(review.rating), 1)', 'rating')
-						.groupBy('product.id')
-						// .addGroupBy('review.id')
-						// .having('AVG(review.rating) >= :ratingThreshold', {
-						// 	ratingThreshold: 0,
-						// })
-						.orderBy('rating', 'DESC')
-						.take(take)
-						.skip(skip)
-						.getRawMany()
-				);
+				return Product.createQueryBuilder('product')
+					.leftJoinAndSelect('product.reviews', 'review')
+					.select('product.*') // select all product fields
+					.addSelect((subQuery) => {
+						return subQuery
+							.select('COALESCE(AVG(review.rating), 0)', 'rating')
+							.from(Review, 'review')
+							.where('review.product = product.id');
+					}, 'rating')
+					.groupBy('product.id')
+					.orderBy('rating', rating === 'asc' ? 'ASC' : 'DESC')
+					.limit(take)
+					.offset(skip)
+					.getRawMany();
 
 			default:
 				return Product.find({
