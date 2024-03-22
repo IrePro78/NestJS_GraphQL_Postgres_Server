@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { Collection } from 'src/graphql/models/collection.model';
+import { Collection } from 'src/graphql/models';
 
 @Injectable()
 export class CollectionsService {

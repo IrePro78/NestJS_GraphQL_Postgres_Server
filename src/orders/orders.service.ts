@@ -1,9 +1,10 @@
 import { Injectable } from '@nestjs/common';
-import { type CreateOrderInput } from 'src/graphql/dto/create-order.input';
-import { type CreateOrderItemInput } from 'src/graphql/dto/create-order-item.input';
-import { OrderItems } from 'src/graphql/models/order-items.model';
-import { Order } from 'src/graphql/models/order.model';
-import { type UpdateOrderItemInput } from 'src/graphql/dto/update-order-item.input';
+import {
+	type CreateOrderInput,
+	type CreateOrderItemInput,
+	type UpdateOrderItemInput,
+} from 'src/graphql/dto';
+import { Order, OrderItems } from 'src/graphql/models';
 
 @Injectable()
 export class OrdersService {

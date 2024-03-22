@@ -5,7 +5,7 @@ COPY package-lock.json ./
 COPY tsconfig.build.json ./
 COPY tsconfig.json ./
 RUN npm i
-COPY src ./
+COPY . ./
 RUN npm run build
 
 FROM node

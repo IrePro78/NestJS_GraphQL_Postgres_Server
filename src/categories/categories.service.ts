@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { Category } from '../graphql/models/category.model';
+import { Category } from 'src/graphql/models';
 
 @Injectable()
 export class CategoriesService {

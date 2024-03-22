@@ -30,6 +30,23 @@ A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date
 """
 scalar DateTime
 
+type Collection {
+  """Unique identifier of the collection"""
+  id: ID!
+
+  """Name of the collection"""
+  name: String!
+
+  """Description of the collection"""
+  description: String
+
+  """Slug of the collection"""
+  slug: String!
+
+  """Get Products By Collection"""
+  products(take: Int! = 20, skip: Int! = 0): [Product!]
+}
+
 type Order {
   """Unique identifier of the order"""
   id: ID!
@@ -105,23 +122,6 @@ type Product {
 
   """Get Reviews By Product"""
   reviews: [Review!]
-}
-
-type Collection {
-  """Unique identifier of the collection"""
-  id: ID!
-
-  """Name of the collection"""
-  name: String!
-
-  """Description of the collection"""
-  description: String
-
-  """Slug of the collection"""
-  slug: String!
-
-  """Get Products By Collection"""
-  products(take: Int! = 20, skip: Int! = 0): [Product!]
 }
 
 type Query {

@@ -1,3 +1,4 @@
+import { join } from 'path';
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
@@ -28,6 +29,7 @@ import { WebhookHandlerModule } from './webhook-handler/webhook-handler.module';
 			playground: false,
 			plugins: [ApolloServerPluginLandingPageLocalDefault()],
 		}),
+
 		ProductsModule,
 		CollectionsModule,
 		CategoriesModule,

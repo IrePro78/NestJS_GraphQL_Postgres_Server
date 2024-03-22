@@ -1,10 +1,13 @@
 import { Injectable } from '@nestjs/common';
+import {
+	type CreateProductInput,
+	type CreateReviewInput,
+} from 'src/graphql/dto';
+
+import { Product, Review } from 'src/graphql/models';
+
 // import { mockProduct } from 'src/_mocks_/products.mocks';
 import { ILike } from 'typeorm';
-import { Review } from 'src/graphql/models/review.model';
-import { type CreateReviewInput } from 'src/graphql/dto/create-review.input ';
-import { Product } from '../graphql/models/product.model';
-import { type CreateProductInput } from '../graphql/dto/create-product.input';
 
 @Injectable()
 export class ProductsService {
