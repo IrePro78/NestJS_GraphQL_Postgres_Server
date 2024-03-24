@@ -1,7 +1,20 @@
 version: '3.9'
 
 services:
-  nestjs_graphql_server:
+  web:
+    container_name: nextjs-frontend
+    restart: always
+    build:
+      context: ../nextmasters
+      dockerfile: Dockerfile
+    depends_on:
+      - api_graphql
+    ports:
+      - '3000:3000'
+    networks:
+      - Next_masters_network
+
+  api_graphql:
     container_name: nestjs-graphql-server
     build: .
     env_file:
@@ -19,8 +32,8 @@ services:
     restart: always
     ports:
       - '5432:5432'
-    volumes:
-      - ./pg_data:/var/lib/postgresql/data
+    # volumes:
+    #   - ./pg_data:/var/lib/postgresql/data
 
     env_file:
       - .env
