@@ -1,14 +1,12 @@
-import { Product } from '../graphql/models/product.model';
-import { mockProduct } from '../_mocks_/products.mocks';
+import { mockProducts } from 'src/_mocks_/products.mocks';
+import { Product } from 'src/graphql/models';
 
 export const seedProduct = async () => {
-	// await Product.save({
-	// 	name: 'Product 1',
-	// 	description: 'This is product 1',
-	// 	price: 100,
-	// 	product_image: 'http://example.com/product1.jpg',
-	// });
-	for (const prod of mockProduct) {
+	console.log('mockProducts', mockProducts[0]);
+
+	for (const prod of mockProducts) {
+		console.log('prod', prod);
+
 		const productId = await Product.createQueryBuilder()
 			.insert()
 			.into(Product)
@@ -18,7 +16,7 @@ export const seedProduct = async () => {
 		await Product.createQueryBuilder()
 			.relation(Product, 'categories')
 			.of(productId)
-			.add('fa1d3061-1650-4ec6-875f-bc643964a005')
+			.add(prod.category_id)
 			.then((res) => res);
 
 		// console.log(prod);

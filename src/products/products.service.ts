@@ -1,4 +1,5 @@
 import { Injectable } from '@nestjs/common';
+import { mockProducts } from 'src/_mocks_/products.mocks';
 import {
 	type CreateProductInput,
 	type CreateReviewInput,
@@ -171,7 +172,7 @@ export class ProductsService {
 	}
 
 	// async create(productData: CreateProductInput) {
-	// 	for (const prod of mockProduct) {
+	// 	for (const prod of mockProducts) {
 	// 		const productId = await Product.createQueryBuilder()
 	// 			.insert()
 	// 			.into(Product)
@@ -182,7 +183,7 @@ export class ProductsService {
 	// 		await Product.createQueryBuilder()
 	// 			.relation(Product, 'categories')
 	// 			.of(productId)
-	// 			.add(prod.category_id)
+	// 			.add('70dc8ded-3407-4baa-92c7-3a9ae3501c11')
 	// 			.then((res) => res);
 	// 	}
 	// 	return this.findOneById('productId');
