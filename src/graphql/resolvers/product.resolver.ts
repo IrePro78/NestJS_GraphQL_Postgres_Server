@@ -31,7 +31,7 @@ export class ProductResolver {
 		nullable: true,
 	})
 	async getProducts(
-		@Args('take', { type: () => Int, defaultValue: 20 }) take: number,
+		@Args('take', { type: () => Int, defaultValue: 30 }) take: number,
 		@Args('skip', { type: () => Int, defaultValue: 0 }) skip: number,
 		@Args('sort', { type: () => String, defaultValue: 'default' })
 		sort: string,
@@ -46,7 +46,7 @@ export class ProductResolver {
 	})
 	async getProductsByName(
 		@Args('name', { type: () => String }) name: string,
-		@Args('take', { type: () => Int, defaultValue: 20 }) take: number,
+		@Args('take', { type: () => Int, defaultValue: 30 }) take: number,
 		@Args('skip', { type: () => Int, defaultValue: 0 }) skip: number,
 	): Promise<Product[]> {
 		return this.productService.findAllByName(name, take, skip);
