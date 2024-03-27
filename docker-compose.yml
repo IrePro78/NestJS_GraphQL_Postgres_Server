@@ -1,54 +1,76 @@
 version: '3.9'
 
 services:
-  web:
-    container_name: nextjs-frontend
-    restart: always
-    build:
-      context: ../nextmasters
-      dockerfile: Dockerfile
-    depends_on:
-      - api_graphql
-    ports:
-      - '3000:3000'
-    networks:
-      - Next_masters_network
+  # web:
+  #   container_name: nextjs-frontend
+  #   restart: always
+  #   build:
+  #     context: ../nextmasters
+  #     dockerfile: Dockerfile
+  #   depends_on:
+  #     - api_graphql
+  #   ports:
+  #     - '3000:3000'
+  #   networks:
+  #     - Next_masters_network
 
-  api_graphql:
-    container_name: nestjs-graphql-server
-    build: .
-    env_file:
-      - .env
-    depends_on:
-      - postgres_db
-    ports:
-      - '4000:4000'
-    networks:
-      - Next_masters_network
+  # api_graphql:
+  #   container_name: nestjs-graphql-server
+  #   build: .
+  #   env_file:
+  #     - .env
+  #   depends_on:
+  #     - postgres_db
+  #   ports:
+  #     - '4000:4000'
+  #   networks:
+  #     - Next_masters_network
+
+  # postgres_db:
+  #   image: postgres:latest
+  #   container_name: postgres-database-masters
+  #   restart: always
+  #   ports:
+  #     - '5432:5432'
+  #   # volumes:
+  #   #   - ./pg_data:/var/lib/postgresql/data
+
+  #   env_file:
+  #     - .env.dev
+
+  #   networks:
+  #     - Next_masters_network
+
+  # qdrant_db:
+  #   container_name: api-masters-qdrant
+  #   image: qdrant/qdrant:latest
+  #   restart: always
+  #   ports:
+  #     - '6333:6333'
+  #   # volumes:
+  #   #   - ./qdrant_storage:/qdrant/storage
+  #   env_file:
+  #     - .env.dev
+  #   networks:
+  #     - Next_masters_network
 
   postgres_db:
     image: postgres:latest
-    container_name: postgres-database-masters
+    container_name: postgres-database-masters-dev
     restart: always
     ports:
       - '5432:5432'
-    # volumes:
-    #   - ./pg_data:/var/lib/postgresql/data
-
     env_file:
       - .env
-
     networks:
       - Next_masters_network
 
   qdrant_db:
-    container_name: api-masters-qdrant
+    container_name: api-masters-qdrant-dev
     image: qdrant/qdrant:latest
     restart: always
     ports:
       - '6333:6333'
-    # volumes:
-    #   - ./qdrant_storage:/qdrant/storage
     env_file:
       - .env
     networks:
