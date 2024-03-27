@@ -44,7 +44,7 @@ type Collection {
   slug: String!
 
   """Get Products By Collection"""
-  products(take: Int! = 20, skip: Int! = 0): [Product!]
+  products(take: Int! = 30, skip: Int! = 0): [Product!]
 }
 
 type Order {
@@ -92,7 +92,7 @@ type Category {
   slug: String!
 
   """Get Products By Category"""
-  products(take: Int! = 20, skip: Int! = 0): [Product!]
+  products(take: Int! = 30, skip: Int! = 0): [Product!]
 }
 
 type Product {
@@ -126,10 +126,10 @@ type Product {
 
 type Query {
   """Get All Products"""
-  products(take: Int! = 20, skip: Int! = 0, sort: String! = "default"): [Product!]
+  products(take: Int! = 30, skip: Int! = 0, sort: String! = "default"): [Product!]
 
   """Get Products By Name"""
-  productsByName(name: String!, take: Int! = 20, skip: Int! = 0): [Product!]
+  productsByName(name: String!, take: Int! = 30, skip: Int! = 0): [Product!]
 
   """Get Product By ID"""
   product(id: ID!): Product
