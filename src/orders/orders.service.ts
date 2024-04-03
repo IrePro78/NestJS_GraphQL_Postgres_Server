@@ -34,16 +34,22 @@ export class OrdersService {
 		return Order.create({ ...createOrderData }).save();
 	}
 
+	private async updateOrder(orderId: string, totalAmount: number) {
+		const order = await Order.update(orderId, { totalAmount });
+	}
+
 	async createOrderItem(createOrderItemData: CreateOrderItemInput) {
 		const { productId, orderId, quantity, total } =
 			createOrderItemData;
 
-		return OrderItems.save({
+		const orderItems = await OrderItems.save({
 			quantity,
 			total,
 			product: { id: productId },
 			order: { id: orderId },
 		});
+
+		return orderItems;
 	}
 
 	async updateOrderItem(updateOrderItemData: UpdateOrderItemInput) {

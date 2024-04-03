@@ -11,6 +11,7 @@ import {
 import { OrderItems } from './order-items.model';
 
 enum OrderStatus {
+	DRAFT = 'DRAFT',
 	PENDING = 'PENDING',
 	COMPLETED = 'COMPLETED',
 	CANCELLED = 'CANCELLED',
@@ -27,7 +28,7 @@ export class Order extends BaseEntity {
 	@Field(() => Float, { description: 'Total amount of the order' })
 	totalAmount: number;
 
-	@Column('enum', { enum: OrderStatus, default: OrderStatus.PENDING })
+	@Column('enum', { enum: OrderStatus, default: OrderStatus.DRAFT })
 	@Field({
 		description: 'Status of the order',
 	})
