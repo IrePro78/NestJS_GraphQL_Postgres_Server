@@ -63,7 +63,7 @@ export class OrderItemsResolver {
 	})
 	async removeOrderItem(
 		@Args('itemId', { type: () => ID }) itemId: string,
-	) {
+	): Promise<void> {
 		return this.orderService.removeOrderItem(itemId);
 	}
 }

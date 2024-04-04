@@ -5,6 +5,7 @@ import {
 	type UpdateOrderItemInput,
 } from 'src/graphql/dto';
 import { Order, OrderItems } from 'src/graphql/models';
+import { type OrderStatus } from 'src/types/order';
 
 @Injectable()
 export class OrdersService {
@@ -31,11 +32,7 @@ export class OrdersService {
 	}
 
 	async create(createOrderData: CreateOrderInput) {
-		return Order.create({ ...createOrderData }).save();
-	}
-
-	private async updateOrder(orderId: string, totalAmount: number) {
-		const order = await Order.update(orderId, { totalAmount });
+		return Order.save({ ...createOrderData });
 	}
 
 	async createOrderItem(createOrderItemData: CreateOrderItemInput) {
@@ -49,6 +46,8 @@ export class OrdersService {
 			order: { id: orderId },
 		});
 
+		await this.updateTotalOrderAmount(orderId);
+
 		return orderItems;
 	}
 
@@ -56,18 +55,49 @@ export class OrdersService {
 		const { itemId, quantity } = updateOrderItemData;
 		const item = await OrderItems.findOne({
 			where: { id: itemId },
-			relations: { product: true },
+			relations: { product: true, order: true },
 		});
-		return OrderItems.save({
+
+		const updatedItem = await OrderItems.save({
 			...item,
 			quantity,
 			total: item.product.price * quantity,
 		});
+
+		await this.updateTotalOrderAmount(item.order.id);
+		return updatedItem;
 	}
 
 	async removeOrderItem(itemId: string) {
-		const item = await OrderItems.delete({ id: itemId });
-		console.log('item', item);
-		return item.raw[0];
+		const item = await OrderItems.findOne({
+			where: { id: itemId },
+			relations: { order: true },
+		});
+
+		await OrderItems.delete({ id: itemId });
+
+		if (!item) {
+			throw new Error('Order item not found');
+		}
+		await this.updateTotalOrderAmount(item.order.id);
+	}
+
+	private async updateTotalOrderAmount(orderId: string) {
+		const orderItems = await OrderItems.find({
+			where: { order: { id: orderId } },
+			relations: { product: true },
+		});
+		const totalAmount = orderItems.reduce(
+			(acc, item) => acc + item.total,
+			0,
+		);
+		return Order.update(orderId, { totalAmount });
+	}
+
+	private async updateOrderStatus(
+		orderId: string,
+		status: OrderStatus,
+	) {
+		return Order.update(orderId, { status });
 	}
 }

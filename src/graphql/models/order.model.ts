@@ -8,14 +8,8 @@ import {
 	PrimaryGeneratedColumn,
 	UpdateDateColumn,
 } from 'typeorm';
+import { OrderStatus } from 'src/types/order';
 import { OrderItems } from './order-items.model';
-
-enum OrderStatus {
-	DRAFT = 'DRAFT',
-	PENDING = 'PENDING',
-	COMPLETED = 'COMPLETED',
-	CANCELLED = 'CANCELLED',
-}
 
 @Entity('orders')
 @ObjectType()
@@ -32,7 +26,7 @@ export class Order extends BaseEntity {
 	@Field({
 		description: 'Status of the order',
 	})
-	status: OrderStatus;
+	status: string;
 
 	@CreateDateColumn({ type: 'timestamp' })
 	@Field(() => Date, { description: 'Date of the order' })
