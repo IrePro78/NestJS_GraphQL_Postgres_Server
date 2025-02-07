@@ -1,4 +1,5 @@
 import { Injectable } from '@nestjs/common';
+
 import { mockProducts } from 'src/_mocks_/products.mocks';
 import {
 	type CreateProductInput,
@@ -6,8 +7,6 @@ import {
 } from 'src/graphql/dto';
 
 import { Product, Review } from 'src/graphql/models';
-
-// import { mockProduct } from 'src/_mocks_/products.mocks';
 import { ILike } from 'typeorm';
 
 @Injectable()
@@ -170,24 +169,6 @@ export class ProductsService {
 
 		return review;
 	}
-
-	// async create(productData: CreateProductInput) {
-	// 	for (const prod of mockProducts) {
-	// 		const productId = await Product.createQueryBuilder()
-	// 			.insert()
-	// 			.into(Product)
-	// 			.values(prod)
-	// 			.execute()
-	// 			.then((res) => res.raw[0].id);
-
-	// 		await Product.createQueryBuilder()
-	// 			.relation(Product, 'categories')
-	// 			.of(productId)
-	// 			.add('70dc8ded-3407-4baa-92c7-3a9ae3501c11')
-	// 			.then((res) => res);
-	// 	}
-	// 	return this.findOneById('productId');
-	// }
 
 	async create(productData: CreateProductInput) {
 		const productId = await Product.createQueryBuilder()
