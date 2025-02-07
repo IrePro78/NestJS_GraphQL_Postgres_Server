@@ -119,6 +119,6 @@ This project is licensed under the MIT License.
 
 Ireneusz Prokopski - [GitHub Profile](https://github.com/IrePro78)
 
-Project Link: [https://github.com/IrePro78/NestJS_GraphQL_Qdrant_Postgres_Server](https://github.com/IrePro78/NestJS_GraphQL_Qdrant_Postgres_Server)
+Project Link: [https://github.com/IrePro78/NestJS_GraphQL_Qdrant_Postgres_Server](https://github.com/IrePro78/NestJS_GraphQL_Postgres_Server)
 
 </div>
