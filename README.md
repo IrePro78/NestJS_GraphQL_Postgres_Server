@@ -85,92 +85,13 @@ npm run start:dev
 
 ## 📝 API Documentation
 
-After starting the server, you can access the GraphQL playground at:
+Detailed API documentation is available in [API_DOCS.md](docs/API_DOCS.md).
+
+You can access the GraphQL playground at:
 
 ```
 http://localhost:3000/graphql
 ```
-
-### Example Queries
-
-<div style="background-color: #2a2a2a; padding: 20px; border-radius: 8px;">
-
-```graphql
-# Get all products
-query {
-	products {
-		id
-		name
-		description
-	}
-}
-
-# Get specific category
-query {
-	category(id: "category-id") {
-		id
-		name
-		products {
-			id
-			name
-		}
-	}
-}
-
-# Create new product
-mutation {
-	createProduct(
-		input: {
-			name: "New Product"
-			description: "Product description"
-			price: 99.99
-			categoryId: "category-id"
-		}
-	) {
-		id
-		name
-		price
-	}
-}
-
-# Create new order
-mutation {
-	createOrder(
-		input: {
-			items: [{ productId: "product-id", quantity: 2 }]
-			customerEmail: "customer@example.com"
-		}
-	) {
-		id
-		totalAmount
-		status
-		items {
-			product {
-				name
-			}
-			quantity
-		}
-	}
-}
-
-# Add review
-mutation {
-	createReview(
-		input: {
-			productId: "product-id"
-			rating: 5
-			comment: "Great product!"
-		}
-	) {
-		id
-		rating
-		comment
-		createdAt
-	}
-}
-```
-
-</div>
 
 ## 🐳 Docker Configuration
 
@@ -188,11 +109,7 @@ Use `docker-compose.yml` to manage the containers.
 
 ## 🤝 Contributing
 
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add some amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
+Contributions are welcome! Please feel free to submit a Pull Request.
 
 ## 📄 License
 
